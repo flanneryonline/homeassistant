@@ -1,0 +1,23 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+lyric:
+  client_id: !secret lyric_client_id
+  client_secret: !secret lyric_client_secret
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+  project_id: !secret nest_project_id
+  subscriber_id: !secret nest_subscriber_id
+neato:
+  client_id: !secret neato_client_id
+  client_secret: !secret neato_client_secret
