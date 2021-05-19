@@ -7,10 +7,15 @@ tts:
   - platform: google_translate
 
 group: !include groups.yaml
+
 automation ui: !include automations.yaml
 automation manual: !include_dir_merge_list automations/
+
 script: !include scripts.yaml
+
 scene: !include scenes.yaml
+
+light: !include_dir_merge_list light_groups/
 
 homeassistant:
   packages: !include_dir_named packages

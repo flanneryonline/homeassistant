@@ -1,0 +1,7 @@
+- platform: group
+  name: FamilyRoomKitchen
+  entities:
+    - light.familyroom
+    - light.island
+    - light.kitchen_main
+    - light.breakfast
