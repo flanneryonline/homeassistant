@@ -1,0 +1,91 @@
+- id: '1624027511254'
+  name: GameTime
+  entities:
+    light.island:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 13
+      friendly_name: Island
+      supported_features: 32
+      state: 'on'
+    light.breakfast:
+      min_mireds: 153
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      friendly_name: Breakfast
+      supported_features: 43
+      state: 'off'
+    light.familyroom:
+      supported_color_modes:
+      - brightness
+      friendly_name: FamilyRoom
+      supported_features: 32
+      state: 'off'
+    light.kitchen_main:
+      supported_color_modes:
+      - brightness
+      friendly_name: KitchenMain
+      supported_features: 32
+      state: 'off'
+- id: '1624028628972'
+  name: MovieTime
+  entities:
+    light.familyroom:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 39
+      friendly_name: FamilyRoom
+      supported_features: 32
+      state: 'on'
+    light.island:
+      supported_color_modes:
+      - brightness
+      friendly_name: Island
+      supported_features: 32
+      state: 'off'
+    light.breakfast:
+      min_mireds: 153
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      friendly_name: Breakfast
+      supported_features: 43
+      state: 'off'
+    light.kitchen_main:
+      supported_color_modes:
+      - brightness
+      friendly_name: KitchenMain
+      supported_features: 32
+      state: 'off'
+    remote.familyroomremote:
+      activity_list:
+      - Front Room
+      - Watch TV
+      current_activity: Watch TV
+      activity_starting:
+      devices_list:
+      - Sceptre TV (2)
+      - NVIDIA Game Console
+      - Denon AV Receiver
+      - Sceptre TV
+      - Google Chromecast
+      - Denon AV Receiver (2)
+      - Vizio TV
+      last_activity: Watch TV
+      friendly_name: FamilyRoomRemote
+      supported_features: 4
+      state: 'on'
+    switch.familyroomremote_watch_tv:
+      friendly_name: FamilyRoomRemote Watch TV
+      state: 'on'
+    switch.familyroomremote_front_room:
+      restored: true
+      supported_features: 0
+      friendly_name: FamilyRoomRemote Front Room
+      state: unavailable
+    switch.familyroomremote_front_room_2:
+      friendly_name: FamilyRoomRemote Front Room
+      state: 'off'
