@@ -1,51 +1,5 @@
-- id: '1617997463166'
-  alias: PatioCameraMotion
-  description: ''
-  trigger:
-  - platform: webhook
-    webhook_id: patio_motion
-  condition: []
-  action:
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 6
-      milliseconds: 0
-  - service: notify.mobile_app_pat_s_phone
-    data:
-      data:
-        image: /api/camera_proxy/camera.server_nas_patio_cam
-      message: Patio
-  - service: notify.mobile_app_mandy_s_phone
-    data:
-      message: Patio
-      data:
-        image: /api/camera_proxy/camera.server_nas_patio_cam
-  mode: single
-- id: '1618152173668'
-  alias: Garage Motion
-  description: ''
-  trigger:
-  - platform: webhook
-    webhook_id: garage_motion
-  condition: []
-  action:
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 6
-      milliseconds: 0
-  - service: notify.mobile_app_pat_s_phone
-    data:
-      data:
-        image: /api/camera_proxy/camera.server_nas_garage_cam
-      message: Garage
-  - service: notify.mobile_app_mandy_s_phone
-    data:
-      message: Garage
-  mode: single
 - id: '1620574270196'
-  alias: FrontLightsOn
+  alias: Front Lights On
   description: ''
   trigger:
   - platform: sun
@@ -58,7 +12,7 @@
     domain: switch
   mode: single
 - id: '1620574324786'
-  alias: FrontLightsOff
+  alias: Front Lights Off
   description: ''
   trigger:
   - platform: sun
@@ -71,7 +25,7 @@
     domain: switch
   mode: single
 - id: '1621277671416'
-  alias: BedroomLampsOn
+  alias: Bedroom Lamps On
   description: ''
   trigger:
   - platform: device
@@ -105,7 +59,7 @@
     brightness_pct: 100
   mode: single
 - id: '1621277785664'
-  alias: BedroomLampsOff
+  alias: Bedroom Lamps Off
   description: ''
   trigger:
   - platform: device
@@ -137,7 +91,7 @@
     domain: light
   mode: single
 - id: '1621278013040'
-  alias: LampsOnSwitch
+  alias: Lamps On Switch
   description: ''
   trigger:
   - platform: device
@@ -163,7 +117,7 @@
     domain: switch
   mode: single
 - id: '1621278084608'
-  alias: LampsOffSwitch
+  alias: Lamps Off Switch
   description: ''
   trigger:
   - platform: device
@@ -197,4 +151,110 @@
     device_id: cbfab1119d03c69eb77e7000157eb296
     entity_id: switch.bedroom_main_lamps
     domain: switch
+  mode: single
+- id: '1621789138280'
+  alias: Front Room Cast
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 0e900c9f4717d5dd812cc64060689548
+    domain: media_player
+    entity_id: media_player.front_room
+    type: playing
+  condition: []
+  action:
+  - type: turn_on
+    device_id: c5cf3840aa9a5edc3f6730aeea7d27b4
+    entity_id: switch.familyroomremote_front_room
+    domain: switch
+  mode: single
+- id: '1622217008219'
+  alias: Washing Machine Done
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.washer_washer_machine_state
+    from: run
+    to: stop
+  condition: []
+  action:
+  - device_id: 89c188c063143ba64a03d02b16ae3cb2
+    domain: mobile_app
+    type: notify
+    title: Washing Machine Complete
+    message: Washing Machine Complete
+  mode: single
+- id: '1622217098267'
+  alias: Dryer Done
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.dryer_dryer_machine_state
+    from: run
+    to: stop
+  condition: []
+  action:
+  - device_id: 89c188c063143ba64a03d02b16ae3cb2
+    domain: mobile_app
+    type: notify
+    title: Dryer Done
+    message: Dryer Done
+  mode: single
+- id: '1622593051570'
+  alias: Patio Cast
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 2ca6e10337791df1d91127a6b6395514
+    domain: media_player
+    entity_id: media_player.patio_deck
+    type: playing
+  condition:
+  - condition: device
+    type: is_off
+    device_id: e2f027ae06779650245eca8a0e090c80
+    entity_id: remote.basementremote
+    domain: remote
+  action:
+  - type: turn_on
+    device_id: e2f027ae06779650245eca8a0e090c80
+    entity_id: switch.basementremote_patio
+    domain: switch
+  mode: single
+- id: '1622924414886'
+  alias: Patio Motion
+  description: ''
+  trigger:
+  - platform: mqtt
+    topic: aimotion/triggers/patio
+    payload: 'on'
+    value_template: '{{ value_json.state }}'
+  condition: []
+  action:
+  - service: notify.mobile_app_pat_s_phone
+    data:
+      message: Patio Motion
+      title: Patio Motion
+      data:
+        image: https://camera.flanneryonline.com/{{ trigger.payload_json.basename
+          }}
+        clickAction: app://com.synology.DScam
+  - service: notify.mobile_app_mandy_s_phone
+    data:
+      message: Patio Motion
+      title: Patio Motion
+      data:
+        image: https://camera.flanneryonline.com/{{ trigger.payload_json.basename
+          }}
+  - service: automation.turn_off
+    target:
+      entity_id: automation.new_automation_2
+  - delay:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  - service: automation.turn_on
+    target:
+      entity_id: automation.new_automation_2
   mode: single
