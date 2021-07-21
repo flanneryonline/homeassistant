@@ -1,5 +1,4 @@
-- id: '1620574270196'
-  alias: Front Lights On
+- alias: Front Lights On
   description: ''
   trigger:
   - platform: sun
@@ -11,8 +10,7 @@
     entity_id: switch.outside_front
     domain: switch
   mode: single
-- id: '1620574324786'
-  alias: Front Lights Off
+- alias: Front Lights Off
   description: ''
   trigger:
   - platform: sun

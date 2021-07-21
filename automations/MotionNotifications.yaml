@@ -1,5 +1,4 @@
-- id: '1622924414886'
-  alias: Patio Motion
+- alias: Patio Motion
   description: ''
   trigger:
   - platform: mqtt

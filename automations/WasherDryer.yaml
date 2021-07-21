@@ -1,5 +1,4 @@
-- id: '1622217008219'
-  alias: Washing Machine Done
+- alias: Washing Machine Done
   description: ''
   trigger:
   - platform: state
@@ -14,8 +13,7 @@
     title: Washing Machine Complete
     message: Washing Machine Complete
   mode: single
-- id: '1622217098267'
-  alias: Dryer Done
+- alias: Dryer Done
   description: ''
   trigger:
   - platform: state

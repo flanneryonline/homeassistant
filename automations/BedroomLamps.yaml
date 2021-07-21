@@ -1,5 +1,4 @@
-- id: '1621277671416'
-  alias: Bedroom Lamps On
+- alias: Bedroom Lamps On
   description: ''
   trigger:
   - platform: device
@@ -30,8 +29,7 @@
     domain: light
     brightness_pct: 100
   mode: single
-- id: '1621277785664'
-  alias: Bedroom Lamps Off
+- alias: Bedroom Lamps Off
   description: ''
   trigger:
   - platform: device
@@ -62,8 +60,7 @@
     entity_id: light.mandys_bedside
     domain: light
   mode: single
-- id: '1621278013040'
-  alias: Lamps On Switch
+- alias: Lamps On Switch
   description: ''
   trigger:
   - platform: device
@@ -88,8 +85,7 @@
     entity_id: switch.bedroom_main_lamps
     domain: switch
   mode: single
-- id: '1621278084608'
-  alias: Lamps Off Switch
+- alias: Lamps Off Switch
   description: ''
   trigger:
   - platform: device
