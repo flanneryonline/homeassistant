@@ -1,0 +1,122 @@
+- alias: Bedroom Lamps On
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: cbfab1119d03c69eb77e7000157eb296
+    entity_id: switch.bedroom_main_lamps
+    domain: switch
+  condition:
+  - condition: device
+    type: is_off
+    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
+    entity_id: light.mandys_bedside
+    domain: light
+  - condition: device
+    type: is_off
+    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
+    entity_id: light.pats_bedside
+    domain: light
+  action:
+  - type: turn_on
+    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
+    entity_id: light.mandys_bedside
+    domain: light
+    brightness_pct: 100
+  - type: turn_on
+    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
+    entity_id: light.pats_bedside
+    domain: light
+    brightness_pct: 100
+  mode: single
+- alias: Bedroom Lamps Off
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: cbfab1119d03c69eb77e7000157eb296
+    entity_id: switch.bedroom_main_lamps
+    domain: switch
+  condition:
+  - condition: or
+    conditions:
+    - condition: device
+      type: is_on
+      device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
+      entity_id: light.mandys_bedside
+      domain: light
+    - condition: device
+      type: is_on
+      device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
+      entity_id: light.pats_bedside
+      domain: light
+  action:
+  - type: turn_off
+    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
+    entity_id: light.pats_bedside
+    domain: light
+  - type: turn_off
+    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
+    entity_id: light.mandys_bedside
+    domain: light
+  mode: single
+- alias: Lamps On Switch
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
+    entity_id: light.mandys_bedside
+    domain: light
+  - platform: device
+    type: turned_on
+    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
+    entity_id: light.pats_bedside
+    domain: light
+  condition:
+  - condition: device
+    type: is_off
+    device_id: cbfab1119d03c69eb77e7000157eb296
+    entity_id: switch.bedroom_main_lamps
+    domain: switch
+  action:
+  - type: turn_on
+    device_id: cbfab1119d03c69eb77e7000157eb296
+    entity_id: switch.bedroom_main_lamps
+    domain: switch
+  mode: single
+- alias: Lamps Off Switch
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
+    entity_id: light.mandys_bedside
+    domain: light
+  - platform: device
+    type: turned_off
+    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
+    entity_id: light.pats_bedside
+    domain: light
+  condition:
+  - condition: device
+    type: is_on
+    device_id: cbfab1119d03c69eb77e7000157eb296
+    entity_id: switch.bedroom_main_lamps
+    domain: switch
+  - condition: device
+    type: is_off
+    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
+    entity_id: light.pats_bedside
+    domain: light
+  - condition: device
+    type: is_off
+    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
+    entity_id: light.mandys_bedside
+    domain: light
+  action:
+  - type: turn_off
+    device_id: cbfab1119d03c69eb77e7000157eb296
+    entity_id: switch.bedroom_main_lamps
+    domain: switch
+  mode: single
