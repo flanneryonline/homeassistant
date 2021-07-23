@@ -1,5 +1,4 @@
-- id: '1621789138280'
-  alias: Front Room Cast
+- alias: Front Room Cast
   description: ''
   trigger:
   - platform: device
@@ -14,8 +13,7 @@
     entity_id: switch.familyroomremote_front_room
     domain: switch
   mode: single
-- id: '1622593051570'
-  alias: Patio Cast
+- alias: Patio Cast
   description: ''
   trigger:
   - platform: device

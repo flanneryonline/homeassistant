@@ -14,6 +14,9 @@
 .cloud
 .google.token
 
+# Ignore generated files
+automations.yaml
+
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
 ip_bans.yaml
 secrets.yaml
