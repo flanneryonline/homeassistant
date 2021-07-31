@@ -11,14 +11,15 @@ http:
 tts:
   - platform: google_translate
 
-group: !include groups.yaml
+group: !include_dir_merge_named groups/
 
 automation ui: !include automations.yaml
 automation manual: !include_dir_merge_list automations/
 
-script: !include scripts.yaml
+script: !include_dir_merge_named scripts/
 
-scene: !include scenes.yaml
+scene ui: !include scenes.yaml
+scene manual: !include_dir_merge_named scenes/
 
 light: !include_dir_merge_list light_groups/
 

@@ -3,8 +3,17 @@
 *
 # You can whitelist files/folders with !, these will not be ignored.
 !packages
+!packages/*
 !automations
+!automations/*
 !light_groups
+!light_groups/*
+!groups
+!groups/*
+!scenes
+!scenes/*
+!scripts
+!scripts/*
 !*.yaml
 !.gitignore
 !*.md
