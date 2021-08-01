@@ -1,24 +1,27 @@
-- alias: Front Lights On
+- alias: Front Lights
   description: ''
   trigger:
-  - platform: sun
-    event: sunset
+    - id: sun_up
+      entity_id: sun.sun
+      platform: state
+      to: 'above_horizon'
+    - id: sun_down
+      entity_id: sun.sun
+      platform: state
+      to: 'below_horizon'
   condition: []
   action:
-  - type: turn_on
-    device_id: fcaae75413524cd2ec74234155a6ee84
-    entity_id: switch.outside_front
-    domain: switch
-  mode: single
-- alias: Front Lights Off
-  description: ''
-  trigger:
-  - platform: sun
-    event: sunrise
-  condition: []
-  action:
-  - type: turn_off
-    device_id: fcaae75413524cd2ec74234155a6ee84
-    entity_id: switch.outside_front
-    domain: switch
+    - choose:
+      - conditions:
+        - condition: trigger
+          id: sun_up
+        sequence:
+          - entity_id: light.outside_front
+            service: light.turn_off
+      - conditions:
+        - condition: trigger
+          id: sun_down
+        sequence:
+          - entity_id: light.outside_front
+            service: light.turn_on
   mode: single

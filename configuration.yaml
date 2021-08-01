@@ -19,9 +19,19 @@ automation manual: !include_dir_merge_list automations/
 script: !include_dir_merge_named scripts/
 
 scene ui: !include scenes.yaml
-scene manual: !include_dir_merge_named scenes/
+scene manual: !include_dir_merge_list scenes/
 
-light: !include_dir_merge_list light_groups/
+light: !include_dir_merge_list lights/
 
 homeassistant:
-  packages: !include_dir_named packages
+  packages: !include_dir_named packages/
+
+lovelace:
+  mode: storage
+  dashboards:
+    lovelace-lights:
+      mode: yaml
+      title: Lights
+      icon: mdi:lightbulb-group
+      show_in_sidebar: true
+      filename: dashboards/lights.yaml

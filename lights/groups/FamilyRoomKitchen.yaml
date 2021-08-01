@@ -1,5 +1,5 @@
 - platform: group
-  name: FamilyRoomKitchen
+  name: FamilyRoom/Kitchen Group
   entities:
     - light.familyroom
     - light.island

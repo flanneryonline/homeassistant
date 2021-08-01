@@ -1,28 +1,25 @@
 - alias: Patio Motion
   description: ''
   trigger:
-  - platform: mqtt
-    topic: aimotion/triggers/patio
-    payload: 'on'
-    value_template: '{{ value_json.state }}'
+    - platform: mqtt
+      topic: aimotion/triggers/patio
+      payload: 'on'
+      value_template: '{{ value_json.state }}'
   condition:
-  - condition: template
-    value_template: '{{ ( as_timestamp(now()) - as_timestamp(state_attr(''automation.patio_motion'',
-      ''last_triggered'')) |int(0) ) > 1800 }}'
+    - condition: template
+      value_template: '{{ ( as_timestamp(now()) - as_timestamp(state_attr(''automation.patio_motion'', ''last_triggered'')) |int(0) ) > 1800 }}'
   action:
-  - service: notify.mobile_app_pat_s_phone
-    data:
-      message: Patio Motion
-      title: Patio Motion
+    - service: notify.mobile_app_pat_s_phone
       data:
-        image: https://camera.flanneryonline.com/{{ trigger.payload_json.basename
-          }}
-        clickAction: app://com.synology.DScam
-  - service: notify.mobile_app_mandy_s_phone
-    data:
-      message: Patio Motion
-      title: Patio Motion
+        message: Patio Motion
+        title: Patio Motion
+        data:
+          image: https://camera.flanneryonline.com/{{ trigger.payload_json.basename }}
+          clickAction: app://com.synology.DScam
+    - service: notify.mobile_app_mandy_s_phone
       data:
-        image: https://camera.flanneryonline.com/{{ trigger.payload_json.basename
-          }}
+        message: Patio Motion
+        title: Patio Motion
+        data:
+          image: https://camera.flanneryonline.com/{{ trigger.payload_json.basename }}
   mode: single

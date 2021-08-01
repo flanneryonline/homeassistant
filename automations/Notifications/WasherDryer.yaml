@@ -1,30 +1,28 @@
 - alias: Washing Machine Done
   description: ''
   trigger:
-  - platform: state
-    entity_id: sensor.washer_washer_machine_state
-    from: run
-    to: stop
+    - platform: state
+      entity_id: sensor.washer_washer_machine_state
+      from: run
+      to: stop
   condition: []
   action:
-  - device_id: 89c188c063143ba64a03d02b16ae3cb2
-    domain: mobile_app
-    type: notify
-    title: Washing Machine Complete
-    message: Washing Machine Complete
+    - service: notify.mobile_app_mandy_s_phone
+      data:
+        message: Washing Machine Complete
+        title: Washing Machine Complete
   mode: single
 - alias: Dryer Done
   description: ''
   trigger:
-  - platform: state
-    entity_id: sensor.dryer_dryer_machine_state
-    from: run
-    to: stop
+    - platform: state
+      entity_id: sensor.dryer_dryer_machine_state
+      from: run
+      to: stop
   condition: []
   action:
-  - device_id: 89c188c063143ba64a03d02b16ae3cb2
-    domain: mobile_app
-    type: notify
-    title: Dryer Done
-    message: Dryer Done
+    - service: notify.mobile_app_mandy_s_phone
+      data:
+        message: Dryer Complete
+        title: Dryer Complete
   mode: single

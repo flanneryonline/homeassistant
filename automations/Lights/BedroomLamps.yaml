@@ -1,122 +1,115 @@
-- alias: Bedroom Lamps On
+- alias: Bedroom Lamps Wall Switch
   description: ''
   trigger:
-  - platform: device
-    type: turned_on
-    device_id: cbfab1119d03c69eb77e7000157eb296
-    entity_id: switch.bedroom_main_lamps
-    domain: switch
-  condition:
-  - condition: device
-    type: is_off
-    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
-    entity_id: light.mandys_bedside
-    domain: light
-  - condition: device
-    type: is_off
-    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
-    entity_id: light.pats_bedside
-    domain: light
-  action:
-  - type: turn_on
-    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
-    entity_id: light.mandys_bedside
-    domain: light
-    brightness_pct: 100
-  - type: turn_on
-    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
-    entity_id: light.pats_bedside
-    domain: light
-    brightness_pct: 100
-  mode: single
-- alias: Bedroom Lamps Off
-  description: ''
-  trigger:
-  - platform: device
-    type: turned_off
-    device_id: cbfab1119d03c69eb77e7000157eb296
-    entity_id: switch.bedroom_main_lamps
-    domain: switch
-  condition:
-  - condition: or
-    conditions:
-    - condition: device
-      type: is_on
-      device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
-      entity_id: light.mandys_bedside
-      domain: light
-    - condition: device
-      type: is_on
-      device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
+    - id: pats_side_on
       entity_id: light.pats_bedside
-      domain: light
+      platform: state
+      to: 'on'
+    - id: pats_side_off
+      entity_id: light.pats_bedside
+      platform: state
+      to: 'off'
+    - id: mandys_side_on
+      entity_id: light.mandys_bedside
+      platform: state
+      to: 'on'
+    - id: mandys_side_off
+      entity_id: light.mandys_bedside
+      platform: state
+      to: 'off'
+    - id: switch_on
+      entity_id: light.bedroom_main_lamps
+      platform: state
+      to: 'on'
+    - id: switch_off
+      entity_id: light.bedroom_main_lamps
+      platform: state
+      to: 'off'
+  condition: []
   action:
-  - type: turn_off
-    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
-    entity_id: light.pats_bedside
-    domain: light
-  - type: turn_off
-    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
-    entity_id: light.mandys_bedside
-    domain: light
-  mode: single
-- alias: Lamps On Switch
-  description: ''
-  trigger:
-  - platform: device
-    type: turned_on
-    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
-    entity_id: light.mandys_bedside
-    domain: light
-  - platform: device
-    type: turned_on
-    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
-    entity_id: light.pats_bedside
-    domain: light
-  condition:
-  - condition: device
-    type: is_off
-    device_id: cbfab1119d03c69eb77e7000157eb296
-    entity_id: switch.bedroom_main_lamps
-    domain: switch
-  action:
-  - type: turn_on
-    device_id: cbfab1119d03c69eb77e7000157eb296
-    entity_id: switch.bedroom_main_lamps
-    domain: switch
-  mode: single
-- alias: Lamps Off Switch
-  description: ''
-  trigger:
-  - platform: device
-    type: turned_off
-    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
-    entity_id: light.mandys_bedside
-    domain: light
-  - platform: device
-    type: turned_off
-    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
-    entity_id: light.pats_bedside
-    domain: light
-  condition:
-  - condition: device
-    type: is_on
-    device_id: cbfab1119d03c69eb77e7000157eb296
-    entity_id: switch.bedroom_main_lamps
-    domain: switch
-  - condition: device
-    type: is_off
-    device_id: 8ff30df3a7a04a9ec52ffaeabf36c31e
-    entity_id: light.pats_bedside
-    domain: light
-  - condition: device
-    type: is_off
-    device_id: 4bd3e4a3b3a026f26b83273a9a95a92d
-    entity_id: light.mandys_bedside
-    domain: light
-  action:
-  - type: turn_off
-    device_id: cbfab1119d03c69eb77e7000157eb296
-    entity_id: switch.bedroom_main_lamps
-    domain: switch
+    - choose:
+      #on from switch
+      - conditions:
+        - condition: and
+          conditions:
+            - condition: or
+              conditions:
+                - condition: state
+                  entity_id: light.pats_bedside
+                  state: "off"
+                - condition: state
+                  entity_id: light.mandys_bedside
+                  state: "off"
+            - condition: trigger
+              id: switch_on
+        sequence:
+          - entity_id: light.pats_bedside
+            service: light.turn_on
+          - entity_id: light.mandys_bedside
+            service: light.turn_on
+      #on from lamps
+      - conditions:
+        - condition: and
+          conditions:
+            - condition: or
+              conditions:
+                - condition: trigger
+                  id: mandys_side_on
+                - condition: trigger
+                  id: pats_side_on
+            - condition: state
+              entity_id: light.bedroom_main_lamps
+              state: "off"
+        sequence:
+          - entity_id: light.bedroom_main_lamps
+            service: light.turn_on
+      #off Mandys side
+      - conditions:
+        - condition: and
+          conditions:
+            - condition: trigger
+              id: mandys_side_off
+            - condition: state
+              entity_id: light.pats_bedside
+              state: "off"
+            - condition: state
+              entity_id: light.bedroom_main_lamps
+              state: "on"
+        sequence:
+          - entity_id: light.bedroom_main_lamps
+            service: light.turn_off
+      #off Pats side
+      - conditions:
+        - condition: and
+          conditions:
+            - condition: trigger
+              id: pats_side_off
+            - condition: state
+              entity_id: light.mandys_bedside
+              state: "off"
+            - condition: state
+              entity_id: light.bedroom_main_lamps
+              state: "on"
+        sequence:
+          - entity_id: light.bedroom_main_lamps
+            service: light.turn_off
+      #off switch
+      - conditions:
+        - condition: and
+          conditions:
+            - condition: trigger
+              id: switch_off
+            - condition: or
+              conditions:
+                - condition: state
+                  entity_id: light.mandys_bedside
+                  state: "on"
+                - condition: state
+                  entity_id: light.pats_bedside
+                  state: "on"
+        sequence:
+          - entity_id: light.pats_bedside
+            service: light.turn_off
+          - entity_id: light.mandys_bedside
+            service: light.turn_off
   mode: single

@@ -1,0 +1,6 @@
+- platform: group
+  name: Bedroom Group
+  entities:
+    - light.bedroom
+    - light.pats_bedside
+    - light.mandys_bedside

@@ -4,10 +4,12 @@
 # You can whitelist files/folders with !, these will not be ignored.
 !packages
 !packages/*
+!dashboards
+!dashboards/*
 !automations
 !automations/*
-!light_groups
-!light_groups/*
+!lights
+!lights/*
 !groups
 !groups/*
 !scenes
@@ -25,6 +27,8 @@
 
 # Ignore generated files
 automations.yaml
+scenes.yaml
+scripts.yaml
 
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
 ip_bans.yaml

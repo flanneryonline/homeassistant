@@ -1,0 +1,5 @@
+- platform: group
+  name: Bedside Lamps Group
+  entities:
+    - light.mandys_bedside
+    - light.pats_bedside

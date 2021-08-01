@@ -1,0 +1,11 @@
+- name: Game Time
+  entities:
+    light.island:
+      state: 'on'
+      brightness: 15
+    light.breakfast:
+      state: 'off'
+    light.familyroom:
+      state: 'off'
+    light.kitchen_main:
+      state: 'off'

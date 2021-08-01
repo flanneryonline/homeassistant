@@ -1,6 +1,6 @@
 binary_sensor:
   - platform: threshold
     entity_id: sensor.bathroomsensor_humidity
-    upper: 56
-    hysteresis: 8
+    upper: 60
+    hysteresis: 6
     name: Bathroom Humidity Threshhold

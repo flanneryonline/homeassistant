@@ -1,0 +1,13 @@
+- platform: group
+  name: Whole House
+  entities:
+    - light.mandys_bedside
+    - light.pats_bedside
+    - light.bedroom
+    - light.familyroom
+    - light.island
+    - light.kitchen_main
+    - light.breakfast
+    - light.frontroom
+    - light.front_hall
+    - light.stairs

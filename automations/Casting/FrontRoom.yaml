@@ -1,0 +1,13 @@
+# - alias: Front Room Cast
+#   description: ''
+#   trigger:
+#     - entity_id: media_player.front_room
+#       platform: device
+#       domain: media_player
+#       type: playing
+#   condition: []
+#   action:
+#     - entity_id: switch.familyroomremote_front_room
+#       type: turn_on
+#       domain: switch
+#   mode: single

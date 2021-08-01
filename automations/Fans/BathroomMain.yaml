@@ -1,0 +1,32 @@
+- alias: Bathroom Main Humidity
+  description: ''
+  trigger:
+    - id: high_humidity
+      entity_id: binary_sensor.bathroom_humidity_threshhold
+      platform: state
+      to: 'on'
+    - id: normal_humidity
+      entity_id: binary_sensor.bathroom_humidity_threshhold
+      platform: state
+      to: 'off'
+  condition: []
+  action:
+    - choose:
+      - conditions:
+        - condition: trigger
+          id: high_humidity
+        sequence:
+          - entity_id: switch.bathroom_main_fan
+            service: switch.turn_on
+          - entity_id: switch.bathroom_water_fan
+            service: switch.turn_on
+      - conditions:
+        - condition: trigger
+          id: normal_humidity
+        sequence:
+          - entity_id: switch.bathroom_main_fan
+            service: switch.turn_off
+          - entity_id: switch.bathroom_water_fan
+            service: switch.turn_off
+      default: []
+  mode: single

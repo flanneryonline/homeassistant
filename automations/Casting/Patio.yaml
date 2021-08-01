@@ -1,0 +1,17 @@
+# - alias: Patio Cast
+#   description: ''
+#   trigger:
+#     - entity_id: media_player.patio_deck
+#       platform: device
+#       domain: media_player
+#       type: playing
+#   condition:
+#     - entity_id: remote.basementremote
+#       condition: device
+#       type: is_off
+#       domain: remote
+#   action:
+#     - entity_id: switch.basementremote_patio
+#       type: turn_on
+#       domain: switch
+#   mode: single
