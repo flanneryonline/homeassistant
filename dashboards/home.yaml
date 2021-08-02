@@ -1,0 +1,77 @@
+title: Home
+views:
+  - title: Home
+    cards:
+      - type: thermostat
+        entity: climate.thermostat
+      - type: 'custom:vacuum-card'
+        entity: vacuum.flanneryvac
+        map: camera.flanneryvac_cleaning_map
+        actions:
+          - name: Start
+            service: vacuum.start
+            icon: 'mdi:start'
+          - name: Pause
+            service: vacuum.start_pause
+            icon: 'mdi:pause'
+          - name: Stop
+            service: vacuum.stop
+            icon: 'mdi:stop'
+  - title: Lights
+    cards:
+      - title: FamilyRoomKitchen
+        type: entities
+        entities:
+          - entity: light.familyroom_kitchen_group
+            type: custom:slider-entity-row
+            full_row: true
+          - entity: light.familyroom
+            type: custom:slider-entity-row
+            toggle: true
+          - entity: light.kitchen_main
+            type: custom:slider-entity-row
+            toggle: true
+          - entity: light.island
+            type: custom:slider-entity-row
+            toggle: true
+          - entity: light.breakfast
+            type: custom:slider-entity-row
+            toggle: true
+      - title: Bedroom
+        type: entities
+        entities:
+          - entity: light.bedroom_group
+            type: custom:slider-entity-row
+            full_row: true
+          - entity: light.pats_bedside
+            type: custom:slider-entity-row
+            toggle: true
+          - entity: light.mandys_bedside
+            type: custom:slider-entity-row
+            toggle: true
+          - entity: light.bedroom
+            type: custom:slider-entity-row
+            toggle: true
+      - title: Other
+        type: entities
+        entities:
+          - entity: light.bathroomwaterlight
+            type: custom:slider-entity-row
+            toggle: true
+          - entity: light.frontroom
+          - entity: light.stairs
+          - entity: light.front_hall
+          - entity: light.outside_front
+  - title: Outside
+    cards:
+      - type: entities
+        entities:
+          - entity: light.outside_front
+          - entity: binary_sensor.garagedoor
+      - title: Patio
+        type: picture-entity
+        entity: camera.patio
+        camera_view: live
+      - type: picture-entity
+        entity: camera.doorbell
+        camera_view: live
