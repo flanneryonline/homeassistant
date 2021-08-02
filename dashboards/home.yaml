@@ -6,7 +6,7 @@ views:
         entity: climate.thermostat
       - type: 'custom:vacuum-card'
         entity: vacuum.flanneryvac
-        map: camera.flanneryvac_cleaning_map
+        # map: camera.flanneryvac_cleaning_map
         actions:
           - name: Start
             service: vacuum.start

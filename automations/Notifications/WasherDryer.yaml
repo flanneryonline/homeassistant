@@ -2,7 +2,7 @@
   description: ''
   trigger:
     - platform: state
-      entity_id: sensor.washer_washer_machine_state
+      entity_id: sensor.washer_state
       from: run
       to: stop
   condition: []
@@ -16,7 +16,7 @@
   description: ''
   trigger:
     - platform: state
-      entity_id: sensor.dryer_dryer_machine_state
+      entity_id: sensor.dryer_state
       from: run
       to: stop
   condition: []
