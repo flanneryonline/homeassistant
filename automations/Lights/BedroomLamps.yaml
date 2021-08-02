@@ -1,4 +1,4 @@
-- alias: Bedroom Lamps Wall Switch
+- alias: Bedroom Lamps
   description: ''
   trigger:
     - id: pats_side_on

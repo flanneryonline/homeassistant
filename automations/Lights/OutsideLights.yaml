@@ -1,4 +1,4 @@
-- alias: Front Lights
+- alias: Outside Lights
   description: ''
   trigger:
     - id: sun_up
