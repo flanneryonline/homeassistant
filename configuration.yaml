@@ -29,7 +29,7 @@ homeassistant:
 lovelace:
   mode: storage
   dashboards:
-    lovelace-lights:
+    lovelace-home:
       mode: yaml
       title: Home
       icon: mdi:home-circle
