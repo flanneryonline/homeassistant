@@ -18,30 +18,18 @@
         sequence:
           - service: zwave_js.set_config_parameter
             target:
-              entity_id: light.bathroomwaterlight
+              entity_id: light.water_closet
             data:
               parameter: "Enable/Disable Switch Mode"
               value: 1
-          - service: zwave_js.set_config_parameter
-            target:
-              entity_id: light.bathroomwaterlight
-            data:
-              parameter: "Default Brightness Level"
-              value: 99
       - conditions:
         - condition: trigger
           id: sun_down
         sequence:
           - service: zwave_js.set_config_parameter
             target:
-              entity_id: light.bathroomwaterlight
+              entity_id: light.water_closet
             data:
               parameter: "Enable/Disable Switch Mode"
               value: 0
-          - service: zwave_js.set_config_parameter
-            target:
-              entity_id: light.bathroomwaterlight
-            data:
-              parameter: "Default Brightness Level"
-              value: 20
   mode: single

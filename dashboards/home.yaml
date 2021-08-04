@@ -6,7 +6,6 @@ views:
         entity: climate.thermostat
       - type: 'custom:vacuum-card'
         entity: vacuum.flanneryvac
-        # map: camera.flanneryvac_cleaning_map
         actions:
           - name: Start
             service: vacuum.start
@@ -67,7 +66,9 @@ views:
       - type: entities
         entities:
           - entity: light.outside_front
-          - entity: binary_sensor.garagedoor
+          - entity: light.garage_lights
+          - entity: binary_sensor.garagedoorstatus
+          - entity: switch.garagedoor_button
       - title: Patio
         type: picture-entity
         entity: camera.patio

@@ -1,7 +1,7 @@
 - platform: group
-  name: FamilyRoom/Kitchen Group
+  name: All Familyroom Kitchen Lights
   entities:
     - light.familyroom
     - light.island
-    - light.kitchen_main
+    - light.kitchen
     - light.breakfast

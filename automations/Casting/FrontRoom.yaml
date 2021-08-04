@@ -22,8 +22,8 @@
             conditions:
               - condition: trigger
                 id: switch_on
-              - condition: trigger
-                id: casting_on
+              # - condition: trigger
+              #   id: casting_on
         sequence:
           # - wait_template: "{{ is_state('remote.familyroomremote', 'off') }}"
           #   timeout: "00:00:15"

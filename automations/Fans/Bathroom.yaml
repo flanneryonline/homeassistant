@@ -1,12 +1,12 @@
-- alias: Bathroom Main Humidity
+- alias: Bathroom Humidity
   description: ''
   trigger:
     - id: high_humidity
-      entity_id: sensor.bathroom_main_humidity
+      entity_id: sensor.bathroom_humidity
       platform: numeric_state
       above: 65
     - id: normal_humidity
-      entity_id: sensor.bathroom_main_humidity
+      entity_id: sensor.bathroom_humidity
       platform: numeric_state
       below: 60
   condition: []
@@ -16,17 +16,17 @@
         - condition: trigger
           id: high_humidity
         sequence:
-          - entity_id: switch.bathroom_main_fan
+          - entity_id: switch.bathroom_fan
             service: switch.turn_on
-          - entity_id: switch.bathroom_water_fan
+          - entity_id: switch.water_closet_fan
             service: switch.turn_on
       - conditions:
         - condition: trigger
           id: normal_humidity
         sequence:
-          - entity_id: switch.bathroom_main_fan
+          - entity_id: switch.bathroom_fan
             service: switch.turn_off
-          - entity_id: switch.bathroom_water_fan
+          - entity_id: switch.water_closet_fan
             service: switch.turn_off
       default: []
   mode: single

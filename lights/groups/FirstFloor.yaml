@@ -1,8 +1,8 @@
 - platform: group
-  name: First Floor Group
+  name: First Floor Lights
   entities:
     - light.familyroom
     - light.island
-    - light.kitchen_main
+    - light.kitchen
     - light.breakfast
-    - light.frontroom
+    - light.front_room

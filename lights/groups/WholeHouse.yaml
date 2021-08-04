@@ -1,13 +1,14 @@
 - platform: group
-  name: Whole House
+  name: Whole House Lights
   entities:
     - light.mandys_bedside
     - light.pats_bedside
     - light.bedroom
     - light.familyroom
     - light.island
-    - light.kitchen_main
+    - light.kitchen
     - light.breakfast
-    - light.frontroom
+    - light.front_room
     - light.front_hall
     - light.stairs
+    - light.garage

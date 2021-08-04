@@ -1,5 +1,5 @@
 - platform: group
-  name: Bedroom Group
+  name: All Bedroom Lights
   entities:
     - light.bedroom
     - light.pats_bedside

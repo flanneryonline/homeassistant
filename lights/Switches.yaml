@@ -1,12 +1,12 @@
 - platform: switch
-  name: Bedroom Main Lamps
-  entity_id: switch.bedroom_main_lamps
-- platform: switch
   name: Front Hall
-  entity_id: switch.front_hall
+  entity_id: switch.front_hall_lights
 - platform: switch
   name: Outside Front
-  entity_id: switch.outside_front
+  entity_id: switch.outside_front_lights
 - platform: switch
   name: Stairs
-  entity_id: switch.stairs
+  entity_id: switch.stairs_lights
+- platform: switch
+  name: Garage
+  entity_id: switch.garage_lights
