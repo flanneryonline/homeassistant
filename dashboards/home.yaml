@@ -21,13 +21,13 @@ views:
       - title: FamilyRoomKitchen
         type: entities
         entities:
-          - entity: light.familyroom_kitchen_group
+          - entity: light.all_familyroom_kitchen_lights
             type: custom:slider-entity-row
             full_row: true
           - entity: light.familyroom
             type: custom:slider-entity-row
             toggle: true
-          - entity: light.kitchen_main
+          - entity: light.kitchen
             type: custom:slider-entity-row
             toggle: true
           - entity: light.island
@@ -39,7 +39,7 @@ views:
       - title: Bedroom
         type: entities
         entities:
-          - entity: light.bedroom_group
+          - entity: light.all_bedroom_lights
             type: custom:slider-entity-row
             full_row: true
           - entity: light.pats_bedside
@@ -54,10 +54,10 @@ views:
       - title: Other
         type: entities
         entities:
-          - entity: light.bathroomwaterlight
+          - entity: light.water_closet
             type: custom:slider-entity-row
             toggle: true
-          - entity: light.frontroom
+          - entity: light.front_room
           - entity: light.stairs
           - entity: light.front_hall
           - entity: light.outside_front
@@ -66,9 +66,9 @@ views:
       - type: entities
         entities:
           - entity: light.outside_front
-          - entity: light.garage_lights
-          - entity: binary_sensor.garagedoorstatus
-          - entity: switch.garagedoor_button
+          - entity: light.garage
+          - entity: binary_sensor.garage_door_status
+          - entity: switch.garage_door_button
       - title: Patio
         type: picture-entity
         entity: camera.patio
