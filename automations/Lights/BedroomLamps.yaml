@@ -30,13 +30,82 @@
     - choose:
       #on from switch
       - conditions:
-        - condition: trigger
-          id: switch_on
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: light.pats_bedside
+              state: "off"
+            - condition: trigger
+              id: switch_on
         sequence:
           - entity_id: light.pats_bedside
             service: light.turn_on
+      - conditions:
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: light.mandys_bedside
+              state: "off"
+            - condition: trigger
+              id: switch_on
+        sequence:
           - entity_id: light.mandys_bedside
             service: light.turn_on
+      - conditions:
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: light.mandys_bedside
+              state: "off"
+            - condition: state
+              entity_id: light.pats_bedside
+              state: "off"
+            - condition: trigger
+              id: switch_on
+        sequence:
+          - entity_id: light.mandys_bedside
+            service: light.turn_on
+          - entity_id: light.pats_bedside
+            service: light.turn_on
+      #off from switch
+      - conditions:
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: light.pats_bedside
+              state: "on"
+            - condition: trigger
+              id: switch_off
+        sequence:
+          - entity_id: light.pats_bedside
+            service: light.turn_off
+      - conditions:
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: light.mandys_bedside
+              state: "on"
+            - condition: trigger
+              id: switch_off
+        sequence:
+          - entity_id: light.mandys_bedside
+            service: light.turn_off
+      - conditions:
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: light.mandys_bedside
+              state: "on"
+            - condition: state
+              entity_id: light.pats_bedside
+              state: "on"
+            - condition: trigger
+              id: switch_off
+        sequence:
+          - entity_id: light.mandys_bedside
+            service: light.turn_off
+          - entity_id: light.pats_bedside
+            service: light.turn_off
       #on from lamps
       - conditions:
         - condition: and
@@ -83,13 +152,4 @@
         sequence:
           - entity_id: switch.bedroom_lamps
             service: switch.turn_off
-      #off switch
-      - conditions:
-        - condition: trigger
-          id: switch_off
-        sequence:
-          - entity_id: light.pats_bedside
-            service: light.turn_off
-          - entity_id: light.mandys_bedside
-            service: light.turn_off
   mode: single

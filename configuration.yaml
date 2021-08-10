@@ -12,6 +12,8 @@ tts:
   - platform: google_translate
 
 group: !include_dir_merge_named groups/
+light: !include_dir_merge_list lights/
+notify: !include_dir_merge_list notify/
 
 automation ui: !include automations.yaml
 automation manual: !include_dir_merge_list automations/
@@ -20,8 +22,6 @@ script: !include_dir_merge_named scripts/
 
 scene ui: !include scenes.yaml
 scene manual: !include_dir_merge_list scenes/
-
-light: !include_dir_merge_list lights/
 
 homeassistant:
   packages: !include_dir_named packages/

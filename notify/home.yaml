@@ -1,0 +1,5 @@
+- name: Home
+  platform: group
+  services:
+  - service: mobile_app_pat_s_phone
+  - service: mobile_app_mandy_s_phone

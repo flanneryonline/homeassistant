@@ -16,6 +16,8 @@
 !scenes/*
 !scripts
 !scripts/*
+!notify
+!notify/*
 !*.yaml
 !.gitignore
 !*.md
