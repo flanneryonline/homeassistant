@@ -1,0 +1,7 @@
+- name: Board Game Time
+  entities:
+    light.front_room:
+      state: 'on'
+      brightness: 99
+    switch.familyroomremote_front_room:
+      state: 'on'

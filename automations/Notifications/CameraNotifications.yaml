@@ -5,59 +5,61 @@
   trigger:
     platform: mqtt
     topic: camera/events
-    value_template: '{{ value_json[''after''][''camera''] }}'
+    value_template: '{{ value_json["after"]["camera"] }}'
   variables:
-    id: '{{ trigger.payload_json[''after''][''id''] }}'
-    camera: '{{ trigger.payload_json[''after''][''camera''] }}'
-    camera_name: '{{ camera | replace(''_'', '' '') | title }}'
-    object: '{{ trigger.payload_json[''after''][''label''] }}'
+    id: '{{ trigger.payload_json["after"]["id"] }}'
+    camera: '{{ trigger.payload_json["after"]["camera"] }}'
+    camera_name: '{{ camera | replace("_", " ") | title }}'
+    object: '{{ trigger.payload_json["after"]["label"] }}'
     label: '{{ object | title }}'
-    entered_zones: '{{ trigger.payload_json[''after''][''entered_zones''] }}'
-    type: '{{ trigger.payload_json[''type''] }}'
+    entered_zones: '{{ trigger.payload_json["after"]["entered_zones"] }}'
+    zones_output: '{{ entered_zones | replace("_", " ") | replace("[", "") | replace("''", "") | replace("]", "") | title }}'
+    type: '{{ trigger.payload_json["type"] }}'
     base_url: 'https://home.flanneryonline.com'
     zone_only: true
     zones:
       - back_door
       - deck_stairs
+      - garage_door
+      - front_door
     labels:
       - person
-      - dog
-      - cat
-      - mouse
   condition:
-    - '{{ type != ''end'' }}'
+    - '{{ type != "end" }}'
     - '{{ not zone_only or entered_zones|length > 0 }}'
-    - '{{ not zones|length or zones|select(''in'', entered_zones)|list|length > 0 }}'
+    - '{{ not zones|length or zones|select("in", entered_zones)|list|length > 0 }}'
     - '{{ not labels|length or object in labels }}'
   action:
-    - service: notify.home
+    - service: notify.phones
       data:
-        message: A {{ label }} was detected on the {{ camera_name }} camera.
+        title: 'A {{label}} was detected on the {{camera_name}} Camera.'
+        message: 'Detected in the following zones: {{zones_output}}'
         data:
-          group: frigate-notification-{{ camera }}
-          tag: '{{ id }}'
+          group: '{{camera_name}} Camera Notification'
+          tag: '{{id}}'
           image: '{{base_url}}/api/frigate/notifications/{{id}}/thumbnail.jpg?format=android'
     - repeat:
         sequence:
           - wait_for_trigger:
             - platform: mqtt
               topic: camera/events
-              payload: '{{ id }}'
-              value_template: '{{ value_json[''after''][''id''] }}'
+              payload: '{{id}}'
+              value_template: '{{ value_json["after"]["id"] }}'
             timeout:
               minutes: 2
             continue_on_timeout: false
           - condition: template
-            value_template: '{{ wait.trigger.payload_json[''type''] == ''end'' }}'
-          - service: notify.home
+            value_template: '{{ wait.trigger.payload_json["type"] == "end" }}'
+          - service: notify.phones
             data:
-              message: A {{ label }} was detected on the {{ camera_name }} camera.
+              title: 'A {{label}} was detected on the {{camera_name}} Camera.'
+              message: 'Detected in the following zones: {{zones_output}}'
               data:
-                group: frigate-notification-{{ camera }}
-                tag: '{{ id }}'
+                group: '{{camera_name}} Camera Notification'
+                tag: '{{id}}'
                 image: '{{base_url}}/api/frigate/notifications/{{id}}/thumbnail.jpg?format=android'
-                clickAction: '{{base_url}}/api/frigate/notifications/{{id}}/{{camera}}/clip.mp4'
-                url: '{{base_url}}/api/frigate/notifications/{{id}}/{{camera}}/clip.mp4'
+                clickAction: '{{base_url}}/api/frigate/notifications/{{id}}/snapshot.jpg'
+                url: '{{base_url}}/api/frigate/notifications/{{id}}/snapshot.jpg'
                 sound: none
                 actions:
                   - action: URI
@@ -66,15 +68,15 @@
                   - action: URI
                     title: View Snapshot
                     uri: '{{base_url}}/api/frigate/notifications/{{id}}/snapshot.jpg'
-                  - action: silence-{{ camera }}
+                  - action: silence-{{camera}}
                     title: Silence Notifications
                     destructive: true
-        until: '{{ wait.trigger.payload_json[''type''] == ''end'' }}'
+        until: '{{ wait.trigger.payload_json["type"] == "end" }}'
     - wait_for_trigger:
       - platform: event
         event_type: mobile_app_notification_action
         event_data:
-          action: silence-{{ camera }}
+          action: silence-{{camera}}
       timeout:
         seconds: 30
       continue_on_timeout: false

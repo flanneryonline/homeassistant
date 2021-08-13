@@ -1,0 +1,13 @@
+- name: Movie Time
+  entities:
+    light.familyroom:
+      brightness: 40
+      state: 'on'
+    light.island:
+      state: 'off'
+    light.breakfast:
+      state: 'off'
+    light.kitchen_main:
+      state: 'off'
+    switch.familyroomremote_watch_tv:
+      state: 'on'

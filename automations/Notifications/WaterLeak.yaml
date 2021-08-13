@@ -1,0 +1,14 @@
+- alias: Sump Pump Water Leak
+  description: ''
+  trigger:
+    - entity_id: binary_sensor.sump_pump_water
+      platform: state
+      from: 'off'
+      to: 'on'
+  condition: []
+  action:
+    - service: notify.phones
+      data:
+        message: Sump Pump Water Leak
+        title: Sump Pump Water Leak
+  mode: single

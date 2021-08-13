@@ -2,8 +2,12 @@ title: Home
 views:
   - title: Home
     cards:
-      - type: thermostat
-        entity: climate.thermostat
+      - type: entities
+        entities:
+          - entity: switch.familyroomremote_watch_tv
+          - entity: switch.bedroomremote_watch_tv
+          - entity: switch.familyroomremote_front_room
+          - entity: switch.basementremote_patio
       - type: 'custom:vacuum-card'
         entity: vacuum.flanneryvac
         actions:

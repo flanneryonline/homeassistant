@@ -35,6 +35,9 @@
             - condition: state
               entity_id: light.pats_bedside
               state: "off"
+            - condition: state
+              entity_id: light.mandys_bedside
+              state: "on"
             - condition: trigger
               id: switch_on
         sequence:
@@ -46,6 +49,9 @@
             - condition: state
               entity_id: light.mandys_bedside
               state: "off"
+            - condition: state
+              entity_id: light.pats_bedside
+              state: "on"
             - condition: trigger
               id: switch_on
         sequence:
@@ -74,6 +80,9 @@
             - condition: state
               entity_id: light.pats_bedside
               state: "on"
+            - condition: state
+              entity_id: light.mandys_bedside
+              state: "off"
             - condition: trigger
               id: switch_off
         sequence:
@@ -85,6 +94,9 @@
             - condition: state
               entity_id: light.mandys_bedside
               state: "on"
+            - condition: state
+              entity_id: light.pats_bedside
+              state: "off"
             - condition: trigger
               id: switch_off
         sequence:
