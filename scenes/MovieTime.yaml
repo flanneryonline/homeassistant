@@ -7,7 +7,7 @@
       state: 'off'
     light.breakfast:
       state: 'off'
-    light.kitchen_main:
+    light.kitchen:
       state: 'off'
     switch.familyroomremote_watch_tv:
       state: 'on'

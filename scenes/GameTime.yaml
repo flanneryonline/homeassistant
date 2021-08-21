@@ -7,5 +7,5 @@
       state: 'off'
     light.familyroom:
       state: 'off'
-    light.kitchen_main:
+    light.kitchen:
       state: 'off'
