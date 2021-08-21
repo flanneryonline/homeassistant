@@ -23,6 +23,9 @@
 !.gitignore
 !*.md
 
+# ESPHome gitignore
+esphome/.gitignore
+
 # Ignore folders.
 .storage
 .cloud
