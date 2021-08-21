@@ -17,15 +17,6 @@ ota:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_pass
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  # ap:
-  #   ssid: "Electric-Panel Fallback"
-  #   password: !secret electric_panel_fallback_pass
-
-mqtt:
-  broker: !secret mqtt_broker
-  username: !secret mqtt_user
-  password: !secret mqtt_pass
 
 time:
   - platform: sntp
