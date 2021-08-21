@@ -1,0 +1,161 @@
+esphome:
+  name: electric-panel
+  platform: ESP32
+  board: nodemcu-32s
+
+substitutions:
+  update_time: 10s
+  gain_ct: '27518'
+  gain_voltage: '7305'
+
+logger:
+
+api:
+
+ota:
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  # ap:
+  #   ssid: "Electric-Panel Fallback"
+  #   password: !secret electric_panel_fallback_pass
+
+mqtt:
+  broker: !secret mqtt_broker
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+
+time:
+  - platform: sntp
+    id: sntp_time
+
+spi:
+  clk_pin: 18
+  miso_pin: 19
+  mosi_pin: 23
+
+sensor:
+  - platform: atm90e32
+    cs_pin: 4
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+    phase_a:
+      voltage:
+        name: Home Volts
+        id: home_volts
+        accuracy_decimals: 1
+      current:
+        name: Furnace Amps
+        id: furnace_amps
+      power:
+        name: Furnace Watts
+        id: furnace_watts
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+    phase_b:
+      current:
+        name: AC Bottom Amps
+        id: ac_bottom_amps
+      power:
+        name: AC Bottom Watts
+        id: ac_bottom_watts
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+    phase_c:
+      current:
+        name: AC Top Amps
+        id: ac_top_amps
+      power:
+        name: AC Top Watts
+        id: ac_top_watts
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+  - platform: atm90e32
+    cs_pin: 5
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+    phase_a:
+      current:
+        name: Solar Black Amps
+        id: solarblack_amps
+      power:
+        name: Solar Black Watts
+        id: solarblack_watts
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+    phase_b:
+      current:
+        name: Solar Red Amps
+        id: solarred_amps
+      power:
+        name: Solar Red Watts
+        id: solarred_watts
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+    phase_c:
+      current:
+        name: Computer Amps
+        id: computer_amps
+      power:
+        name: Computer Watts
+        id: computer_watts
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+
+  #SOLAR
+  - platform: template
+    name: Solar Amps
+    id: totalSolarAmps
+    lambda: return id(solarred_amps).state + id(solarblack_amps).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: A
+    icon: "mdi:flash"
+    update_interval: ${update_time}
+  - platform: template
+    name: Solar Watts
+    id: totalSolarWatts
+    lambda: return id(solarred_watts).state + id(solarblack_watts).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+  - platform: total_daily_energy
+    name: Solar kWh
+    power_id: totalSolarWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+  #HVAC
+  - platform: template
+    name: HVAC Amps
+    id: totalHvacAmps
+    lambda: return id(furnace_amps).state + id(ac_top_amps).state + id(ac_bottom_amps).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: A
+    icon: "mdi:flash"
+    update_interval: ${update_time}
+  - platform: template
+    name: HVAC Watts
+    id: totalHvacWatts
+    lambda: return id(furnace_watts).state + id(ac_top_watts).state + id(ac_bottom_watts).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+  - platform: total_daily_energy
+    name: HVAC kWh
+    power_id: totalHvacWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+  #COMPUTER
+  - platform: total_daily_energy
+    name: Computer kWh
+    power_id: computer_watts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
