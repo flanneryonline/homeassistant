@@ -1,6 +1,22 @@
 title: Home
 views:
-  - title: Home
+  - title: Overview
+    cards:
+      - type: entities
+        entities:
+          - entity: light.all_familyroom_kitchen_lights
+            type: custom:slider-entity-row
+            full_row: true
+          - entity: light.all_bedroom_lights
+            type: custom:slider-entity-row
+            full_row: true
+          - entity: binary_sensor.garage_door_status
+            secondary_info: last-changed
+          - entity: sensor.patio_person
+            secondary_info: last-changed
+          - entity: sensor.garage_person
+            secondary_info: last-changed
+  - title: Media
     cards:
       - type: entities
         entities:
@@ -8,18 +24,6 @@ views:
           - entity: switch.bedroomremote_watch_tv
           - entity: switch.familyroomremote_front_room
           - entity: switch.basementremote_patio
-      - type: 'custom:vacuum-card'
-        entity: vacuum.flanneryvac
-        actions:
-          - name: Start
-            service: vacuum.start
-            icon: 'mdi:start'
-          - name: Pause
-            service: vacuum.start_pause
-            icon: 'mdi:pause'
-          - name: Stop
-            service: vacuum.stop
-            icon: 'mdi:stop'
   - title: Lights
     cards:
       - title: FamilyRoomKitchen
