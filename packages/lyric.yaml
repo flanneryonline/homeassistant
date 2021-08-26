@@ -1,3 +1,0 @@
-# lyric:
-#   client_id: !secret lyric_client_id
-#   client_secret: !secret lyric_client_secret

@@ -1,42 +1,18 @@
-# Example .gitignore file for your config dir.
-# An * ensures that everything will be ignored.
-*
-# You can whitelist files/folders with !, these will not be ignored.
-!packages
-!packages/*
-!dashboards
-!dashboards/*
-!automations
-!automations/*
-!lights
-!lights/*
-!groups
-!groups/*
-!scenes
-!scenes/*
-!scripts
-!scripts/*
-!esphome
-!notify
-!notify/*
-!*.yaml
-!.gitignore
-!*.md
-
-# ESPHome gitignore
-esphome/.gitignore
-
-# Ignore folders.
-.storage
 .cloud
-.google.token
-
-# Ignore generated files
+.storage
+.vscode
+blueprints
+custom_components
+deps
+themes
+tts
+www
+.HA_VERSION
+aircast.xml
 automations.yaml
+*.conf
+*.db*
+*.log
 scenes.yaml
-scripts.yaml
-
-# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
-ip_bans.yaml
+!packages/scenes.yaml
 secrets.yaml
-known_devices.yaml

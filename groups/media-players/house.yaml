@@ -1,0 +1,6 @@
+- name: House
+  platform: group
+  entities:
+    - media_player.kitchen_speaker
+    - media_player.workout_speaker
+    # - media_player.front_room

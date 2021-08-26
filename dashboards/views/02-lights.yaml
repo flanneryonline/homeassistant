@@ -1,0 +1,45 @@
+title: Lights
+cards:
+  - title: FamilyRoomKitchen
+    type: entities
+    entities:
+      - entity: light.all_familyroom_kitchen_lights
+        type: custom:slider-entity-row
+        full_row: true
+      - entity: light.familyroom
+        type: custom:slider-entity-row
+        toggle: true
+      - entity: light.kitchen
+        type: custom:slider-entity-row
+        toggle: true
+      - entity: light.island
+        type: custom:slider-entity-row
+        toggle: true
+      - entity: light.breakfast
+        type: custom:slider-entity-row
+        toggle: true
+  - title: Bedroom
+    type: entities
+    entities:
+      - entity: light.all_bedroom_lights
+        type: custom:slider-entity-row
+        full_row: true
+      - entity: light.pats_bedside
+        type: custom:slider-entity-row
+        toggle: true
+      - entity: light.mandys_bedside
+        type: custom:slider-entity-row
+        toggle: true
+      - entity: light.bedroom
+        type: custom:slider-entity-row
+        toggle: true
+  - title: Other
+    type: entities
+    entities:
+      - entity: light.water_closet
+        type: custom:slider-entity-row
+        toggle: true
+      - entity: light.front_room
+      - entity: light.stairs
+      - entity: light.front_hall
+      - entity: light.outside_front

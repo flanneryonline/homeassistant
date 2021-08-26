@@ -1,0 +1,6 @@
+logger:
+  default: warning
+  filters:
+    pychromecast.socket_client:
+      - "Failed to connect to service ServiceInfo"
+      - "Error communicating with socket, resetting connection"

@@ -1,0 +1,13 @@
+title: Media
+cards:
+  - title: Remotes
+    type: entities
+    entities:
+      - entity: switch.familyroomremote_watch_tv
+        secondary_info: last-changed
+      - entity: switch.bedroomremote_watch_tv
+        secondary_info: last-changed
+      - entity: switch.familyroomremote_front_room
+        secondary_info: last-changed
+      - entity: switch.basementremote_patio
+        secondary_info: last-changed
