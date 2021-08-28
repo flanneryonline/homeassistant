@@ -19,7 +19,17 @@ cards:
     entities:
       - entity: binary_sensor.garage_door_status
         secondary_info: last-changed
+  - type: entities
+    entities:
       - entity: sensor.patio_person
         secondary_info: last-changed
+  - type: picture-entity
+    entity: camera.patio_person
+    camera_image: camera.patio_person
+  - type: entities
+    entities:
       - entity: sensor.garage_person
         secondary_info: last-changed
+  - type: picture-entity
+    entity: camera.garage_person
+    camera_image: camera.garage_person
