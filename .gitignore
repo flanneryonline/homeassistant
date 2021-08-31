@@ -1,6 +1,5 @@
-.cloud
-.storage
-.vscode
+.*
+!.gitignore
 blueprints
 custom_components
 deps
