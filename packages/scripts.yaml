@@ -1,1 +1,2 @@
-script: !include_dir_merge_named ../scripts/
+scripts ui: !include ../scripts.yaml
+scripts: !include_dir_merge_named ../scripts/
