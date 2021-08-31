@@ -1,0 +1,16 @@
+- type: vertical-stack
+  cards:
+    - type: custom:weather-card
+      entity: weather.home
+      number_of_forecasts: '5'
+      hourly_forecast: false
+      forecast: true
+      current: true
+      name: Weather
+    - type: custom:weather-card
+      entity: weather.hourly
+      name: Hourly
+      current: false
+      details: false
+      hourly_forecast: true
+      number_of_forecasts: '6'
