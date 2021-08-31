@@ -15,4 +15,6 @@ automations.yaml
 *.log
 scenes.yaml
 !packages/scenes.yaml
+scripts.yaml
+!packages/scripts.yaml
 secrets.yaml
