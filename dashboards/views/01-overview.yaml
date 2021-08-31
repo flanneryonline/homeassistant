@@ -1,35 +1,3 @@
 title: Overview
 path: home-overview
-cards:
-  - title: FamilyRoomKitchen
-    type: entities
-    entities:
-      - entity: light.all_familyroom_kitchen_lights
-        type: custom:slider-entity-row
-        full_row: true
-        toggle: true
-  - title: Bedroom
-    type: entities
-    entities:
-      - entity: light.all_bedroom_lights
-        type: custom:slider-entity-row
-        full_row: true
-        toggle: true
-  - type: entities
-    entities:
-      - entity: binary_sensor.garage_door_status
-        secondary_info: last-changed
-  - type: entities
-    entities:
-      - entity: sensor.patio_person
-        secondary_info: last-changed
-  - type: picture-entity
-    entity: camera.patio_person
-    camera_image: camera.patio_person
-  - type: entities
-    entities:
-      - entity: sensor.garage_person
-        secondary_info: last-changed
-  - type: picture-entity
-    entity: camera.garage_person
-    camera_image: camera.garage_person
+cards: !include_dir_merge_list ../cards/overview/

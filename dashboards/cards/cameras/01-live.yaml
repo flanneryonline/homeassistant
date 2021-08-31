@@ -1,0 +1,11 @@
+- title: Patio
+  type: picture-entity
+  entity: camera.patio
+  camera_view: live
+- title: Patio
+  type: picture-entity
+  entity: camera.garage
+  camera_view: live
+- type: picture-entity
+  entity: camera.doorbell
+  camera_view: live

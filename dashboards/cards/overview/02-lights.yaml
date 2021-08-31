@@ -1,0 +1,14 @@
+- title: FamilyRoom / Kitchen
+  type: entities
+  entities:
+    - entity: light.all_familyroom_kitchen_lights
+      type: custom:slider-entity-row
+      full_row: true
+      toggle: true
+- title: Bedroom
+  type: entities
+  entities:
+    - entity: light.all_bedroom_lights
+      type: custom:slider-entity-row
+      full_row: true
+      toggle: true
