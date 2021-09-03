@@ -1,5 +1,7 @@
 - type: custom:mini-graph-card
   entities:
+    - entity: binary_sensor.doorbell_person_motion
+      name: Doorbell
     - entity: binary_sensor.patio_person_motion
       name: Patio
     - entity: binary_sensor.garage_person_motion
@@ -23,4 +25,8 @@
 - type: entities
   entities:
     - entity: sensor.garage_person
+      secondary_info: last-changed
+- type: entities
+  entities:
+    - entity: sensor.doorbell_person
       secondary_info: last-changed

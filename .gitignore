@@ -12,6 +12,7 @@ automations.yaml
 *.conf
 *.db*
 *.log
+*.log.*
 scenes.yaml
 scripts.yaml
 secrets.yaml

@@ -15,7 +15,7 @@
     entered_zones: '{{ trigger.payload_json["after"]["entered_zones"] }}'
     zones_output: '{{ entered_zones | replace("_", " ") | replace("[", "") | replace("''", "") | replace("]", "") | title }}'
     type: '{{ trigger.payload_json["type"] }}'
-    base_url: 'https://home.flanneryonline.com'
+    base_url: !secret external_url
     zone_only: true
     zones:
       - back_door
