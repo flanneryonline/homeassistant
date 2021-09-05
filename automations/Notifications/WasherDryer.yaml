@@ -11,6 +11,9 @@
       data:
         message: Washing Machine Complete
         title: Washing Machine Complete
+        data:
+          ttl: 0
+          priority: high
   mode: single
 - alias: Dryer Done
   description: ''
@@ -25,4 +28,7 @@
       data:
         message: Dryer Complete
         title: Dryer Complete
+        data:
+          ttl: 0
+          priority: high
   mode: single

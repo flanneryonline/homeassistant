@@ -11,4 +11,7 @@
       data:
         message: Sump Pump Water Leak
         title: Sump Pump Water Leak
+        data:
+          ttl: 0
+          priority: high
   mode: single
