@@ -1,11 +1,6 @@
-- alias: Front Room Cast
+- alias: Front Room TV Switch
   description: ''
   trigger:
-    # - id: casting_on
-    #   entity_id: media_player.front_room
-    #   platform: device
-    #   domain: media_player
-    #   type: playing
     - id: switch_on
       entity_id: switch.front_room_tv
       platform: state
@@ -22,19 +17,21 @@
             conditions:
               - condition: trigger
                 id: switch_on
-              # - condition: trigger
-              #   id: casting_on
         sequence:
-          # - wait_template: "{{ is_state('remote.familyroomremote', 'off') }}"
-          #   timeout: "00:00:15"
-          - entity_id: switch.familyroomremote_front_room
-            service: switch.turn_on
+          - service: switch.turn_on
+            entity_id: switch.remote_front_room
+          - service: media_player.turn_on
+            entity_id: media_player.m2_front_room
+          - service: media_player.select_source
+            data_template:
+              source: "Front Room"
+              entity_id: media_player.m2_front_room
       - conditions:
           - condition: trigger
             id: switch_off
         sequence:
-          # - wait_template: "{{ is_state('remote.familyroomremote', 'on') }}"
-          #   timeout: "00:00:15"
-          - entity_id: switch.familyroomremote_front_room
-            service: switch.turn_off
+          - service: switch.turn_off
+            entity_id: switch.remote_front_room
+          - service: media_player.turn_off
+            entity_id: media_player.m2_front_room
   mode: single

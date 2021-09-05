@@ -1,11 +1,9 @@
 - title: Remotes
   type: entities
   entities:
-    - entity: switch.familyroomremote_watch_tv
+    - entity: switch.remote_family_room
       secondary_info: last-changed
-    - entity: switch.bedroomremote_watch_tv
+    - entity: switch.remote_bedroom
       secondary_info: last-changed
-    - entity: switch.familyroomremote_front_room
-      secondary_info: last-changed
-    - entity: switch.basementremote_patio
+    - entity: switch.remote_front_room
       secondary_info: last-changed

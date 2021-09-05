@@ -8,15 +8,15 @@
     condition: or
     conditions:
       - condition: state
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.cast_kitchen_mini
         state: 'off'
       - condition: state
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.cast_kitchen_mini
         state: 'idle'
   action:
     - service: media_player.play_media
       target:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.cast_kitchen_mini
       data:
         media_content_id: '{{local_url}}/local/silence.mp3'
         media_content_type: music
