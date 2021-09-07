@@ -1,0 +1,23 @@
+- type: custom:mini-media-player
+  entity: media_player.front_room
+  hide:
+    power_state: false
+- type: custom:mini-media-player
+  entity: media_player.family_room
+  hide:
+    source: true
+    power_state: false
+- type: custom:mini-media-player
+  entity: media_player.bedroom
+  hide:
+    source: true
+    power_state: false
+- type: custom:mini-media-player
+  entity: media_player.patio
+  hide:
+    power_state: false
+- type: custom:mini-media-player
+  entity: media_player.workout_room
+  hide:
+    source: true
+    power_state: false

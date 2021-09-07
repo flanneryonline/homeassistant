@@ -1,0 +1,47 @@
+- name: Workout Room
+  platform: universal
+  device_class: receiver
+  children:
+    - media_player.cast_workout_tv
+    - media_player.plex_workout_tv
+    - media_player.cast_workout_mini
+  state_template: >-
+      {% if (not (is_state('media_player.cast_workout_mini','off')
+      or is_state('media_player.cast_workout_mini','idle')
+      or is_state('media_player.cast_workout_mini','unknown') ))
+      or is_state('media_player.workout_tv','on') %}
+      on
+      {% else %}
+      off
+      {% endif %}
+  attributes:
+    state: sensor.workout_tv
+    is_volume_muted: media_player.workout_tv|is_volume_muted
+    volume_level: media_player.workout_tv|volume_level
+  commands:
+    turn_on:
+      service: media_player.turn_on
+      target:
+        entity_id: media_player.workout_tv
+    turn_off:
+      service: media_player.turn_off
+      target:
+        entity_id: media_player.workout_tv
+    volume_up:
+      service: media_player.volume_up
+      target:
+        entity_id: media_player.workout_tv
+    volume_down:
+      service: media_player.volume_down
+      target:
+        entity_id: media_player.workout_tv
+    volume_mute:
+      service: media_player.volume_mute
+      target:
+        entity_id: media_player.workout_tv
+    volume_set:
+      service: media_player.volume_set
+      target:
+        entity_id: media_player.workout_tv
+      data:
+        volume_level: "{{ volume_level }}"

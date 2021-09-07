@@ -1,0 +1,37 @@
+- name: Family Room
+  platform: universal
+  device_class: receiver
+  children:
+    - media_player.plex_family_room_shield
+    - media_player.cast_family_room_shield
+  attributes:
+    state: remote.family_room
+    is_volume_muted: media_player.family_room_receiver|is_volume_muted
+    volume_level: media_player.family_room_receiver|volume_level
+  commands:
+    turn_on:
+      service: remote.turn_on
+      target:
+        entity_id: remote.family_room
+    turn_off:
+      service: remote.turn_off
+      target:
+        entity_id: remote.family_room
+    volume_up:
+      service: media_player.volume_up
+      target:
+        entity_id: media_player.family_room_receiver
+    volume_down:
+      service: media_player.volume_down
+      target:
+        entity_id: media_player.family_room_receiver
+    volume_mute:
+      service: media_player.volume_mute
+      target:
+        entity_id: media_player.family_room_receiver
+    volume_set:
+      service: media_player.volume_set
+      target:
+        entity_id: media_player.family_room_receiver
+      data:
+        volume_level: "{{ volume_level }}"

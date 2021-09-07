@@ -1,5 +1,5 @@
 - alias: Front Room TV Switch
-  description: ''
+  hide_entity: True
   trigger:
     - id: switch_on
       entity_id: switch.front_room_tv
@@ -9,17 +9,62 @@
       entity_id: switch.front_room_tv
       platform: state
       to: "off"
+    - id: remote_on
+      entity_id: switch.remote_front_room
+      platform: state
+      to: 'on'
+    - id: remote_off
+      entity_id: switch.remote_front_room
+      platform: state
+      to: 'off'
   condition: []
   action:
     - choose:
       - conditions:
-          - condition: or
-            conditions:
-              - condition: trigger
-                id: switch_on
+        - condition: trigger
+          id: remote_on
+        - condition: state
+          entity_id: switch.front_room_tv
+          state: 'off'
+        sequence:
+          - service: switch.turn_on
+            entity_id: switch.front_room_tv
+      - conditions:
+        - condition: trigger
+          id: remote_off
+        - condition: state
+          entity_id: switch.front_room_tv
+          state: 'on'
+        sequence:
+          - service: switch.turn_off
+            entity_id: switch.front_room_tv
+    - choose:
+      - conditions:
+        - condition: trigger
+          id: switch_on
+        - condition: state
+          entity_id: switch.remote_front_room
+          state: 'off'
         sequence:
           - service: switch.turn_on
             entity_id: switch.remote_front_room
+      - conditions:
+        - condition: trigger
+          id: switch_off
+        - condition: state
+          entity_id: switch.remote_front_room
+          state: 'on'
+        sequence:
+          - service: switch.turn_off
+            entity_id: switch.remote_front_room
+    - choose:
+      - conditions:
+        - condition: trigger
+          id: switch_on
+        - condition: state
+          entity_id: media_player.m2_front_room
+          state: 'off'
+        sequence:
           - service: media_player.turn_on
             entity_id: media_player.m2_front_room
           - service: media_player.select_source
@@ -27,11 +72,14 @@
               source: "Front Room"
               entity_id: media_player.m2_front_room
       - conditions:
-          - condition: trigger
-            id: switch_off
+        - condition: trigger
+          id: switch_off
+        - condition: state
+          entity_id: media_player.m2_front_room
+          state: 'on'
         sequence:
-          - service: switch.turn_off
-            entity_id: switch.remote_front_room
           - service: media_player.turn_off
             entity_id: media_player.m2_front_room
   mode: single
+
+

@@ -1,0 +1,45 @@
+- name: Patio
+  platform: universal
+  device_class: speaker
+  children:
+    - media_player.cast_home
+    - media_player.m4_patio
+  attributes:
+    state: media_player.m4_patio
+    is_volume_muted: media_player.m4_patio|is_volume_muted
+    volume_level: media_player.m4_patio|volume_level
+    source: media_player.m4_patio|source
+    source_list: media_player.m4_patio|source_list
+  commands:
+    turn_on:
+      service: media_player.turn_on
+      target:
+        entity_id: media_player.m4_patio
+    turn_off:
+      service: media_player.turn_off
+      target:
+        entity_id: media_player.m4_patio
+    volume_up:
+      service: media_player.volume_up
+      target:
+        entity_id: media_player.m4_patio
+    volume_down:
+      service: media_player.volume_down
+      target:
+        entity_id: media_player.m4_patio
+    volume_mute:
+      service: media_player.volume_mute
+      target:
+        entity_id: media_player.m4_patio
+    select_source:
+      service: media_player.select_source
+      target:
+        entity_id: media_player.m4_patio
+      data:
+        source: '{{ source }}'
+    volume_set:
+      service: media_player.volume_set
+      target:
+        entity_id: media_player.m4_patio
+      data:
+        volume_level: "{{ volume_level }}"

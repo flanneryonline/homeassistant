@@ -1,0 +1,31 @@
+- name: Bedroom
+  platform: universal
+  device_class: receiver
+  children:
+    - media_player.plex_bedroom_shield
+    - media_player.cast_bedroom_shield
+  attributes:
+    state: remote.bedroom
+  commands:
+    turn_on:
+      service: remote.turn_on
+      target:
+        entity_id: remote.bedroom
+    turn_off:
+      service: remote.turn_off
+      target:
+        entity_id: remote.bedroom
+    volume_up:
+      service: remote.send_command
+      target:
+        entity_id: remote.bedroom
+      data:
+        device: Receiver
+        command: VolumeUp
+    volume_down:
+      service: remote.send_command
+      target:
+        entity_id: remote.bedroom
+      data:
+        device: Receiver
+        command: VolumeDown

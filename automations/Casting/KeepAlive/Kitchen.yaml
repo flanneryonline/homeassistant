@@ -1,4 +1,5 @@
 - alias: Kitchen Keep Alive
+  hide_entity: True
   variables:
     local_url: !secret local_url
   trigger:

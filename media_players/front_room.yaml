@@ -1,0 +1,46 @@
+- name: Front Room
+  platform: universal
+  device_class: receiver
+  children:
+    - media_player.cast_front_room
+    - media_player.cast_home
+    - media_player.m2_front_room
+  attributes:
+    state: switch.front_room_tv
+    is_volume_muted: media_player.m2_front_room|is_volume_muted
+    volume_level: media_player.m2_front_room|volume_level
+    source: media_player.m2_front_room|source
+    source_list: media_player.m2_front_room|source_list
+  commands:
+    turn_on:
+      service: switch.turn_on
+      target:
+        entity_id: switch.front_room_tv
+    turn_off:
+      service: switch.turn_off
+      target:
+        entity_id: switch.front_room_tv
+    volume_up:
+      service: media_player.volume_up
+      target:
+        entity_id: media_player.m2_front_room
+    volume_down:
+      service: media_player.volume_down
+      target:
+        entity_id: media_player.m2_front_room
+    volume_mute:
+      service: media_player.volume_mute
+      target:
+        entity_id: media_player.m2_front_room
+    select_source:
+      service: media_player.select_source
+      target:
+        entity_id: media_player.m2_front_room
+      data:
+        source: '{{ source }}'
+    volume_set:
+      service: media_player.volume_set
+      target:
+        entity_id: media_player.m2_front_room
+      data:
+        volume_level: "{{ volume_level }}"
