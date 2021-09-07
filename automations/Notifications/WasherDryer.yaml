@@ -1,5 +1,4 @@
 - alias: Washing Machine Done
-  description: ''
   trigger:
     - platform: state
       entity_id: sensor.washer_state
@@ -12,11 +11,11 @@
         message: Washing Machine Complete
         title: Washing Machine Complete
         data:
+          channel: 'Laundry'
           ttl: 0
           priority: high
   mode: single
 - alias: Dryer Done
-  description: ''
   trigger:
     - platform: state
       entity_id: sensor.dryer_state
@@ -29,6 +28,7 @@
         message: Dryer Complete
         title: Dryer Complete
         data:
+          channel: 'Laundry'
           ttl: 0
           priority: high
   mode: single

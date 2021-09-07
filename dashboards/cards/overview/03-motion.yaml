@@ -1,32 +1,68 @@
-- type: custom:mini-graph-card
-  entities:
-    - entity: binary_sensor.doorbell_person_motion
-      name: Doorbell
-    - entity: binary_sensor.patio_person_motion
-      name: Patio
-    - entity: binary_sensor.garage_person_motion
-      name: Garage
-  name: Motion
-  hours_to_show: 2
-  points_per_hour: 30
-  update_interval: 30
-  aggregate_func: max
-  line_width: 2
-  smoothing: false
-  state_map:
-    - value: "off"
-      label: Clear
-    - value: "on"
-      label: Detected
-- type: entities
-  entities:
-    - entity: sensor.patio_person
-      secondary_info: last-changed
-- type: entities
-  entities:
-    - entity: sensor.garage_person
-      secondary_info: last-changed
-- type: entities
-  entities:
-    - entity: sensor.doorbell_person
-      secondary_info: last-changed
+- type: vertical-stack
+  cards:
+    - type: custom:mini-graph-card
+      entities:
+        - entity: binary_sensor.doorbell_person_motion
+          name: Doorbell
+        - entity: binary_sensor.patio_person_motion
+          name: Patio
+        - entity: binary_sensor.garage_person_motion
+          name: Garage
+      name: Person Motion
+      hours_to_show: 2
+      points_per_hour: 30
+      update_interval: 30
+      aggregate_func: max
+      line_width: 2
+      smoothing: false
+      state_map:
+        - value: "off"
+          label: Clear
+        - value: "on"
+          label: Detected
+    - type: entities
+      entities:
+        - entity: sensor.patio_person
+          secondary_info: last-changed
+    - type: entities
+      entities:
+        - entity: sensor.garage_person
+          secondary_info: last-changed
+    - type: entities
+      entities:
+        - entity: sensor.doorbell_person
+          secondary_info: last-changed
+- type: vertical-stack
+  cards:
+    - type: custom:mini-graph-card
+      entities:
+        - entity: binary_sensor.patio_dog_motion
+          name: Patio
+        - entity: binary_sensor.doorbell_dog_motion
+          name: Doorbell
+        - entity: binary_sensor.garage_dog_motion
+          name: Garage
+      name: Dog Motion
+      hours_to_show: 2
+      points_per_hour: 30
+      update_interval: 30
+      aggregate_func: max
+      line_width: 2
+      smoothing: false
+      state_map:
+        - value: "off"
+          label: Clear
+        - value: "on"
+          label: Detected
+    - type: entities
+      entities:
+        - entity: sensor.patio_dog
+          secondary_info: last-changed
+    - type: entities
+      entities:
+        - entity: sensor.garage_dog
+          secondary_info: last-changed
+    - type: entities
+      entities:
+        - entity: sensor.doorbell_dog
+          secondary_info: last-changed

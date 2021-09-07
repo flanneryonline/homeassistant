@@ -1,5 +1,5 @@
 - alias: Bedroom Lamps
-  description: ''
+  hide_entity: True
   trigger:
     - id: pats_side_on
       entity_id: light.pats_bedside

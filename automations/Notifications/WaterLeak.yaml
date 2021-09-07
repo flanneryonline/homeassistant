@@ -1,5 +1,4 @@
 - alias: Sump Pump Water Leak
-  description: ''
   trigger:
     - entity_id: binary_sensor.sump_pump_water
       platform: state
@@ -12,6 +11,7 @@
         message: Sump Pump Water Leak
         title: Sump Pump Water Leak
         data:
+          channel: 'Alarm'
           ttl: 0
           priority: high
   mode: single

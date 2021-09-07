@@ -1,5 +1,5 @@
 - alias: Outside Lights
-  description: ''
+  hide_entity: True
   trigger:
     - id: sun_up
       entity_id: sun.sun

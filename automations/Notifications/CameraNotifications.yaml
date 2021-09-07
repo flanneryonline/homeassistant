@@ -1,5 +1,4 @@
 - alias: Camera Notifications
-  description: ''
   mode: single
   max_exceeded: silent
   trigger:
@@ -37,6 +36,7 @@
         data:
           ttl: 0
           priority: high
+          channel: 'Camera Detection'
           group: '{{camera_name}} Camera Notification'
           tag: '{{id}}'
           image: '{{base_url}}/api/frigate/notifications/{{id}}/thumbnail.jpg?format=android'
@@ -59,6 +59,7 @@
               data:
                 ttl: 0
                 priority: high
+                channel: 'Camera Detection'
                 group: '{{camera_name}} Camera Notification'
                 tag: '{{id}}'
                 image: '{{base_url}}/api/frigate/notifications/{{id}}/thumbnail.jpg?format=android'

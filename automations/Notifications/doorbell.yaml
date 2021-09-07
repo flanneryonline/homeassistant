@@ -1,5 +1,4 @@
 - alias: Doorbell
-  description: ''
   variables:
     local_url: !secret local_url
   trigger:
@@ -13,6 +12,7 @@
         message: Doorbell
         title: Doorbell
         data:
+          channel: 'Doorbell'
           ttl: 0
           priority: high
     - service: media_player.play_media
