@@ -1,1 +1,63 @@
-default_config:
+cloud:
+config:
+counter:
+energy:
+image:
+logbook:
+media_source:
+mobile_app:
+my:
+person:
+stream:
+sun:
+system_health:
+timer:
+updater:
+webhook:
+zone:
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 10.0.0.0/8
+
+logger:
+  default: error
+  filters:
+    homeassistant.loader:
+      - "We found a custom integration *"
+    pychromecast.socket_client:
+      - "Failed to connect to service ServiceInfo"
+      - "Error communicating with socket, resetting connection"
+      - "Error reading from socket."
+    homeassistant.components.nws:
+      - "Error requesting NWS *"
+    homeassistant.components.nfandroidtv.config_flow:
+      - "Error connecting to device at *"
+    aioharmony.harmonyclient:
+      - "Unable to determine if XMPP is enabled*"
+    aioharmony.hubconnector_websocket:
+      - "Connection timed out for hub*"
+
+recorder:
+  db_url: !secret mysql
+  include:
+    domains:
+      - person
+    entity_globs:
+      - binary_sensor.*_motion
+      - binary_sensor.*_water
+      - camera.*_person
+      - sensor.*_kwh
+      - sensor.*_watts
+      - sensor.*_amps
+    entities:
+      - binary_sensor.garage_door_status
+      - sensor.dryer_job_state
+      - sensor.washer_job_state
+      - sensor.dryer_state
+      - sensor.washer_state
+      - sensor.dryer_energy
+      - sensor.washer_energy
+      - switch.doorbell
+      - switch.garage_door_button

@@ -1,9 +1,0 @@
-lovelace:
-  mode: storage
-  dashboards:
-    lovelace-home:
-      mode: yaml
-      title: Home
-      icon: mdi:home-circle
-      show_in_sidebar: true
-      filename: dashboards/home.yaml

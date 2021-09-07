@@ -1,0 +1,14 @@
+automation ui: !include ../automations.yaml
+automation: !include_dir_merge_list ../automations/
+
+light: !include_dir_merge_list ../lights/
+
+media_player: !include_dir_merge_list ../media_players/
+
+notify: !include_dir_merge_list ../notify/
+
+scene ui: !include ../scenes.yaml
+scene: !include_dir_merge_list ../scenes/
+
+script ui: !include ../scripts.yaml
+script: !include_dir_merge_named ../scripts/
