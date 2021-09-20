@@ -34,10 +34,16 @@ logger:
       - "Error requesting NWS *"
     homeassistant.components.nfandroidtv.config_flow:
       - "Error connecting to device at *"
+    homeassistant.components.plex.server:
+      - "Could not connect to Plex server: *"
     aioharmony.harmonyclient:
       - "Unable to determine if XMPP is enabled*"
     aioharmony.hubconnector_websocket:
       - "Connection timed out for hub*"
+    custom_components.frigate.api:
+      - "Timeout error fetching information from *"
+    custom_components.hacs:
+      - "Timeout of 20 reached while waiting for *"
 
 recorder:
   db_url: !secret mysql
