@@ -4,7 +4,8 @@
   trigger:
     - platform: state
       entity_id: switch.doorbell
-      to: 'off'
+      to: 'on'
+      from: 'off'
   condition: []
   action:
     - service: notify.phones
