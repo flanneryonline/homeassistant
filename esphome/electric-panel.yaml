@@ -6,7 +6,7 @@ esphome:
 substitutions:
   update_time: 10s
   gain_ct: '27518'
-  gain_voltage: '7305'
+  gain_voltage: '7135'
 
 logger:
 
@@ -34,34 +34,21 @@ sensor:
     gain_pga: 1X
     update_interval: ${update_time}
     phase_a:
-      voltage:
-        name: Home Volts
-        id: home_volts
-        accuracy_decimals: 1
-      current:
-        name: Furnace Amps
-        id: furnace_amps
       power:
         name: Furnace Watts
-        id: furnace_watts
+        id: furnace
       gain_voltage: ${gain_voltage}
       gain_ct: ${gain_ct}
     phase_b:
-      current:
-        name: AC Bottom Amps
-        id: ac_bottom_amps
       power:
-        name: AC Bottom Watts
-        id: ac_bottom_watts
+        name: Bedrooms Watts
+        id: bedrooms
       gain_voltage: ${gain_voltage}
       gain_ct: ${gain_ct}
     phase_c:
-      current:
-        name: AC Top Amps
-        id: ac_top_amps
       power:
-        name: AC Top Watts
-        id: ac_top_watts
+        name: Second Floor Watts
+        id: second_floor
       gain_voltage: ${gain_voltage}
       gain_ct: ${gain_ct}
   - platform: atm90e32
@@ -70,69 +57,82 @@ sensor:
     gain_pga: 1X
     update_interval: ${update_time}
     phase_a:
-      current:
-        name: Solar Black Amps
-        id: solarblack_amps
       power:
-        name: Solar Black Watts
-        id: solarblack_watts
+        name: AC Watts
+        id: ac
       gain_voltage: ${gain_voltage}
       gain_ct: ${gain_ct}
     phase_b:
-      current:
-        name: Solar Red Amps
-        id: solarred_amps
       power:
-        name: Solar Red Watts
-        id: solarred_watts
+        name: Right Phase A Watts
+        id: right1
       gain_voltage: ${gain_voltage}
       gain_ct: ${gain_ct}
     phase_c:
-      current:
-        name: Computer Amps
-        id: computer_amps
       power:
-        name: Computer Watts
-        id: computer_watts
+        name: Right Phase B Watts
+        id: right2
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+  - platform: atm90e32
+    cs_pin: 0
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+    phase_a:
+      power:
+        name: Main Phase 1 Watts
+        id: main1
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+    phase_b:
+      power:
+        name: Main Phase 2 Watts
+        id: main2
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+    phase_c:
+      power:
+        name: Solar Watts
+        id: solar
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+  - platform: atm90e32
+    cs_pin: 16
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+    phase_a:
+      power:
+        name: Basement Watts
+        id: basement
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+    phase_b:
+      power:
+        name: Utility Watts
+        id: utilities
+      gain_voltage: ${gain_voltage}
+      gain_ct: ${gain_ct}
+    phase_c:
+      power:
+        name: Bathrooms Watts
+        id: bathrooms
       gain_voltage: ${gain_voltage}
       gain_ct: ${gain_ct}
 
-  #SOLAR
-  - platform: template
-    name: Solar Amps
-    id: totalSolarAmps
-    lambda: return id(solarred_amps).state + id(solarblack_amps).state ;
-    accuracy_decimals: 2
-    unit_of_measurement: A
-    icon: "mdi:flash"
-    update_interval: ${update_time}
-  - platform: template
-    name: Solar Watts
-    id: totalSolarWatts
-    lambda: return id(solarred_watts).state + id(solarblack_watts).state ;
-    accuracy_decimals: 1
-    unit_of_measurement: W
-    icon: "mdi:flash-circle"
-    update_interval: ${update_time}
+  #Solar
   - platform: total_daily_energy
     name: Solar kWh
-    power_id: totalSolarWatts
+    power_id: solar
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
   #HVAC
   - platform: template
-    name: HVAC Amps
-    id: totalHvacAmps
-    lambda: return id(furnace_amps).state + id(ac_top_amps).state + id(ac_bottom_amps).state ;
-    accuracy_decimals: 2
-    unit_of_measurement: A
-    icon: "mdi:flash"
-    update_interval: ${update_time}
-  - platform: template
     name: HVAC Watts
     id: totalHvacWatts
-    lambda: return id(furnace_watts).state + id(ac_top_watts).state + id(ac_bottom_watts).state ;
+    lambda: return id(furnace).state + id(ac).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
     icon: "mdi:flash-circle"
@@ -143,10 +143,75 @@ sensor:
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
-  #COMPUTER
+  #Main
+  - platform: template
+    name: Main Watts
+    id: totalMainWatts
+    lambda: return id(main1).state + id(main2).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+  - platform: template
+    name: Grid Input Watts
+    id: GridInputWatts
+    lambda: >-
+      if (id(totalMainWatts).state > 0.0) {
+        return 0.0 ;
+      } else {
+        return id(totalMainWatts).state * -1 ;
+      }
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+  - platform: template
+    name: Grid Output Watts
+    id: GridOutputWatts
+    lambda: >-
+      if (id(totalMainWatts).state < 0.0) {
+        return 0.0 ;
+      } else {
+        return id(totalMainWatts).state ;
+      }
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
   - platform: total_daily_energy
-    name: Computer kWh
-    power_id: computer_watts
+    name: Grid Input kWh
+    power_id: GridInputWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+  - platform: total_daily_energy
+    name: Grid Output kWh
+    power_id: GridOutputWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+  #Total Energy Used
+  - platform: template
+    name: Consumed Watts
+    id: consumedWatts
+    lambda: >-
+      return
+        id(utilities).state +
+        id(furnace).state +
+        id(bedrooms).state +
+        id(basement).state +
+        id(bathrooms).state +
+        id(second_floor).state +
+        id(ac).state +
+        id(right1).state +
+        id(right2).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+  - platform: total_daily_energy
+    name: Consumed kWh
+    power_id: consumedWatts
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh

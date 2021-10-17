@@ -1,16 +1,36 @@
-- type: custom:mini-graph-card
-  name: Energy
-  show:
-    fill: false
-    state: false
-    graph: bar
-    icon: false
-  entities:
-    - name: Computer
-      entity: sensor.computer_kwh
-    - name: HVAC
-      entity: sensor.hvac_kwh
-    - name: Washer
-      entity: sensor.washer_energy
-    - name: Dryer
-      entity: sensor.dryer_energy
+- type: vertical-stack
+  cards:
+    - type: custom:mini-graph-card
+      name: Main Energy
+      show:
+        fill: false
+        state: false
+        graph: line
+        icon: false
+      entities:
+        - name: Grid Input
+          entity: sensor.grid_input_watts
+        - name: Grid Output
+          entity: sensor.grid_output_watts
+        - name: Solar
+          entity: sensor.solar_watts
+        - name: Consumed
+          entity: sensor.consumed_watts
+    - type: custom:mini-graph-card
+      name: Consumed Energy
+      show:
+        fill: false
+        state: false
+        graph: line
+        icon: false
+      entities:
+        - name: HVAC
+          entity: sensor.hvac_watts
+        - name: Bedrooms
+          entity: sensor.bedrooms_watts
+        - name: Bathrooms
+          entity: sensor.bathrooms_watts
+        - name: Basement
+          entity: sensor.basement_watts
+        - name: Utilities
+          entity: sensor.utility_watts
