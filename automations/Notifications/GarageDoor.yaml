@@ -1,0 +1,46 @@
+- alias: Doorbell
+  variables:
+    local_url: !secret local_url
+  trigger:
+    - platform: state
+      entity_id: switch.bedroom_watch_tv
+      from: "off"
+      to: "on"
+      id: watching_tv
+    - platform: state
+      entity_id: person.pat
+      from: "home"
+      id: pat_gone
+    - platform: state
+      entity_id: person.mandy
+      from: "home"
+      id: mandy_gone
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.garage_door_status
+          state: "on"
+        - condition: or
+          conditions:
+            - condition: and
+              conditions:
+                - condition: trigger
+                  id: mandy_gone
+                - condition: trigger
+                  id: pat_gone
+            - condition: and
+              conditions:
+                - condition: trigger
+                  id: watching_tv
+                #add any other triggers above here
+  action:
+    - service: notify.phones
+      data:
+        title: 'Garage Door is still open!'
+        data:
+          ttl: 0
+          priority: high
+          channel: 'Garage Door'
+          group: 'Garage Door'
+  mode: single
