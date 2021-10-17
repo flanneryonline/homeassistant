@@ -1,0 +1,87 @@
+- alias: Camera Notifications - Animal
+  mode: single
+  max_exceeded: silent
+  trigger:
+    platform: mqtt
+    topic: camera/events
+    value_template: '{{ value_json["after"]["camera"] }}'
+  variables:
+    id: '{{ trigger.payload_json["after"]["id"] }}'
+    camera: '{{ trigger.payload_json["after"]["camera"] }}'
+    camera_name: '{{ camera | replace("_", " ") | title }}'
+    object: '{{ trigger.payload_json["after"]["label"] }}'
+    label: '{{ object | title }}'
+    entered_zones: '{{ trigger.payload_json["after"]["entered_zones"] }}'
+    zones_output: '{{ entered_zones | replace("_", " ") | replace("[", "") | replace("''", "") | replace("]", "") | title }}'
+    type: '{{ trigger.payload_json["type"] }}'
+    base_url: !secret external_url
+    zone_only: false
+    zones: []
+    labels:
+      - dog
+      - cat
+      - mouse
+  condition:
+    - '{{ type != "end" }}'
+    - '{{ not zone_only or entered_zones|length > 0 }}'
+    - '{{ not zones|length or zones|select("in", entered_zones)|list|length > 0 }}'
+    - '{{ not labels|length or object in labels }}'
+  action:
+    - service: notify.phones
+      data:
+        title: 'A {{label}} was detected on the {{camera_name}} Camera.'
+        message: 'Detected in the following zones: {{zones_output}}'
+        data:
+          ttl: 0
+          priority: high
+          channel: 'Animal Detection'
+          group: '{{camera_name}} Camera Notification - Animal'
+          tag: '{{id}}'
+          image: '{{base_url}}/api/frigate/notifications/{{id}}/thumbnail.jpg?format=android'
+    - repeat:
+        sequence:
+          - wait_for_trigger:
+            - platform: mqtt
+              topic: camera/events
+              payload: '{{id}}'
+              value_template: '{{ value_json["after"]["id"] }}'
+            timeout:
+              minutes: 2
+            continue_on_timeout: false
+          - condition: template
+            value_template: '{{ wait.trigger.payload_json["type"] == "end" }}'
+          - service: notify.phones
+            data:
+              title: 'A {{label}} was detected on the {{camera_name}} Camera.'
+              message: 'Detected in the following zones: {{zones_output}}'
+              data:
+                ttl: 0
+                priority: high
+                channel: 'Animal Detection'
+                group: '{{camera_name}} Camera Notification - Animal'
+                tag: '{{id}}'
+                image: '{{base_url}}/api/frigate/notifications/{{id}}/thumbnail.jpg?format=android'
+                clickAction: '{{base_url}}/api/frigate/notifications/{{id}}/snapshot.jpg'
+                url: '{{base_url}}/api/frigate/notifications/{{id}}/snapshot.jpg'
+                sound: none
+                actions:
+                  - action: URI
+                    title: View Clip
+                    uri: '{{base_url}}/api/frigate/notifications/{{id}}/{{camera}}/clip.mp4'
+                  - action: URI
+                    title: View Snapshot
+                    uri: '{{base_url}}/api/frigate/notifications/{{id}}/snapshot.jpg'
+                  - action: silence-{{camera}}
+                    title: Silence Notifications
+                    destructive: true
+        until: '{{ wait.trigger.payload_json["type"] == "end" }}'
+    - wait_for_trigger:
+      - platform: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: silence-{{camera}}
+      timeout:
+        seconds: 30
+      continue_on_timeout: false
+    - delay:
+        minutes: 30

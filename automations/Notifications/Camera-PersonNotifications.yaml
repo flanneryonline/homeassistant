@@ -1,4 +1,4 @@
-- alias: Camera Notifications
+- alias: Camera Notifications - Person
   mode: single
   max_exceeded: silent
   trigger:
