@@ -2,9 +2,11 @@
   platform: universal
   device_class: receiver
   children:
-    - media_player.cast_front_room
-    - media_player.cast_home
     - media_player.m2_front_room
+    - media_player.plex_front_room_cast
+    - media_player.cast_front_room
+    - media_player.plex_home_cast
+    - media_player.cast_home
   attributes:
     state: switch.front_room_tv
     is_volume_muted: media_player.m2_front_room|is_volume_muted

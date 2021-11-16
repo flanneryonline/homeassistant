@@ -2,8 +2,9 @@
   platform: universal
   device_class: speaker
   children:
-    - media_player.cast_home
     - media_player.m4_patio
+    - media_player.plex_home_cast
+    - media_player.cast_home
   attributes:
     state: media_player.m4_patio
     is_volume_muted: media_player.m4_patio|is_volume_muted
