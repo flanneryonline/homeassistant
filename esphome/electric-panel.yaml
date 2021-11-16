@@ -128,6 +128,56 @@ sensor:
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
+  #Bedrooms
+  - platform: total_daily_energy
+    name: Bedrooms kWh
+    power_id: bedrooms
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+  #Bathrooms
+  - platform: total_daily_energy
+    name: Bathrooms kWh
+    power_id: bathrooms
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+  #Basement
+  - platform: total_daily_energy
+    name: Basement kWh
+    power_id: basement
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+  #Second Floor
+  - platform: total_daily_energy
+    name: Second Floor kWh
+    power_id: second_floor
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+  #Utilities
+  - platform: total_daily_energy
+    name: Utilities kWh
+    power_id: utilities
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+  #First Floor
+  - platform: template
+    name: First Floor Watts
+    id: FirstFloorWatts
+    lambda: return id(right1).state + id(right2).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+  - platform: total_daily_energy
+    name: First Floor kWh
+    power_id: FirstFloorWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
   #HVAC
   - platform: template
     name: HVAC Watts
