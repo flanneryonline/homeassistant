@@ -3,10 +3,20 @@ frontend:
 
 lovelace:
   mode: storage
-  dashboards:
-    lovelace-home:
-      mode: yaml
-      title: Home
-      icon: mdi:home-circle
-      show_in_sidebar: true
-      filename: dashboards/home.yaml
+  dashboards: !include ../dashboards/config.yaml
+
+panel_custom:
+  - name: panel-redirect
+    url_path: redirect-server-controls
+    sidebar_title: Server Controls
+    sidebar_icon: mdi:server
+    module_url: /local/panel-redirect.js
+    config:
+      target: /config/server_control
+  - name: panel-redirect
+    url_path: redirect-integrations
+    sidebar_title: Integrations
+    sidebar_icon: mdi:transit-connection-variant
+    module_url: /local/panel-redirect.js
+    config:
+      target: /config/integrations

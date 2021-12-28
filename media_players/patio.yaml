@@ -44,3 +44,27 @@
         entity_id: media_player.m4_patio
       data:
         volume_level: "{{ volume_level }}"
+    media_seek:
+      service: media_player.media_seek
+      data:
+        seek_position: '{{ seek_position }}'
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m4_patio", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_next_track:
+      service: media_player.media_seek
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m4_patio", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+      data:
+        seek_position: 99999
+    media_stop:
+      service: media_player.media_stop
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m4_patio", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_pause:
+      service: media_player.media_pause
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m4_patio", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_play:
+      service: media_player.media_play
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m4_patio", "source") | lower | replace(" ", "_") | replace("_cast","") }}'

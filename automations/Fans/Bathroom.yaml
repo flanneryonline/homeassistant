@@ -1,31 +1,86 @@
-# - alias: Bathroom Humidity
+- alias: Fan - Bathroom Humidity
+  variables:
+    temperature_sensor: sensor.bathroom_temperature
+    humidity_sensor: sensor.bathroom_humidity
+    reference_temperature_sensor: sensor.powder_room_temperature
+    reference_humidity_sensor: sensor.powder_room_humidity
+    fan_switch: switch.bathroom_fan
+    switch_state: "{{ states(fan_switch) }}"
+    rising_threshold: 1.1
+    falling_threshold: 0.9
+    abs_humid_ref: >-
+      {% set h, t = states(reference_humidity_sensor)|float, states(reference_temperature_sensor) %}
+      {% if not h or t == 'unknown' -%}
+        'unknown'
+      {%- else %}
+      {% set t = t | float %}
+      {{ (h*6.112*2.1674*e**((t*17.67)/(t+243.5))/(t+273.15))|round(2) }}
+      {% endif %}
+    abs_humid: >-
+      {% set h, t = states(humidity_sensor)|float, states(temperature_sensor) %}
+      {% if not h or t == 'unknown' -%}
+        'unknown'
+      {%- else %}
+      {% set t = t | float %}
+      {{ (h*6.112*2.1674*e**((t*17.67)/(t+243.5))/(t+273.15))|round(2) }}
+      {% endif %}
+    difference: "{{ abs_humid|float - abs_humid_ref|float }}"
+    mode:
+      "{% if switch_state == 'off' and difference|float > rising_threshold|float
+      %}on{% elif switch_state == 'on' and difference|float > falling_threshold|float
+      %}on{% else %}off{% endif %}"
+  trigger:
+    - entity_id: sensor.bathroom_humidity
+      platform: state
+    - entity_id: sensor.powder_room_humidity
+      platform: state
+  condition:
+    - '{{ mode != switch_state }}'
+    - '{{ states("sensor.season") != "winter" }}'
+  action:
+    - service: switch.turn_{{mode}}
+      entity_id: switch.bathroom_fan
+  mode: single
+
+# - alias: Fan - Guest Bathroom Humidity
+#   variables:
+#     temperature_sensor: sensor.guest_bathroom_temperature
+#     humidity_sensor: sensor.guest_bathroom_humidity
+#     reference_temperature_sensor: sensor.powder_room_temperature
+#     reference_humidity_sensor: sensor.powder_room_humidity
+#     fan_switch: switch.guest_bathroom_fan
+#     switch_state: "{{ states(fan_switch) }}"
+#     rising_threshold: 1.1
+#     falling_threshold: 0.9
+#     abs_humid_ref: >-
+#       {% set h, t = states(reference_humidity_sensor)|float, states(reference_temperature_sensor) %}
+#       {% if not h or t == 'unknown' -%}
+#         'unknown'
+#       {%- else %}
+#       {% set t = t | float %}
+#       {{ (h*6.112*2.1674*e**((t*17.67)/(t+243.5))/(t+273.15))|round(2) }}
+#       {% endif %}
+#     abs_humid: >-
+#       {% set h, t = states(humidity_sensor)|float, states(temperature_sensor) %}
+#       {% if not h or t == 'unknown' -%}
+#         'unknown'
+#       {%- else %}
+#       {% set t = t | float %}
+#       {{ (h*6.112*2.1674*e**((t*17.67)/(t+243.5))/(t+273.15))|round(2) }}
+#       {% endif %}
+#     difference: "{{ abs_humid|float - abs_humid_ref|float }}"
+#     mode:
+#       "{% if switch_state == 'off' and difference|float > rising_threshold|float
+#       %}on{% elif switch_state == 'on' and difference|float > falling_threshold|float
+#       %}on{% else %}off{% endif %}"
 #   trigger:
-#     - id: high_humidity
-#       entity_id: sensor.bathroom_humidity
-#       platform: numeric_state
-#       above: 65
-#     - id: normal_humidity
-#       entity_id: sensor.bathroom_humidity
-#       platform: numeric_state
-#       below: 60
-#   condition: []
+#     - entity_id: '{{humidity_sensor}}'
+#       platform: state
+#     - entity_id: '{{reference_humidity_sensor}}'
+#       platform: state
+#   condition:
+#     - '{{ mode != switch_state }}'
 #   action:
-#     - choose:
-#       - conditions:
-#         - condition: trigger
-#           id: high_humidity
-#         sequence:
-#           - entity_id: switch.bathroom_fan
-#             service: switch.turn_on
-#           - entity_id: switch.water_closet_fan
-#             service: switch.turn_on
-#       - conditions:
-#         - condition: trigger
-#           id: normal_humidity
-#         sequence:
-#           - entity_id: switch.bathroom_fan
-#             service: switch.turn_off
-#           - entity_id: switch.water_closet_fan
-#             service: switch.turn_off
-#       default: []
+#     - service: switch.turn_{{mode}}
+#       entity_id: '{{fan_switch}}'
 #   mode: single

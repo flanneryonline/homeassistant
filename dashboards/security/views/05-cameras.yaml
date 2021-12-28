@@ -1,0 +1,3 @@
+title: Live
+path: security-cameras
+cards: !include_dir_merge_list ../cards/cameras/

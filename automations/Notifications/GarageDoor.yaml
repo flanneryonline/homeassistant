@@ -1,4 +1,4 @@
-- alias: Doorbell
+- alias: Notifications - Security - Garage Door Open
   variables:
     local_url: !secret local_url
   trigger:

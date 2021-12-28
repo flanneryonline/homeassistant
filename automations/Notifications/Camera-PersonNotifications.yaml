@@ -1,4 +1,4 @@
-- alias: Camera Notifications - Person
+- alias: Notifications - Camera - Person
   mode: single
   max_exceeded: silent
   trigger:
@@ -31,7 +31,7 @@
   action:
     - service: notify.phones
       data:
-        title: 'A {{label}} was detected on the {{camera_name}} Camera.'
+        title: 'A Person was detected on the {{camera_name}} Camera.'
         message: 'Detected in the following zones: {{zones_output}}'
         data:
           ttl: 0
@@ -54,7 +54,7 @@
             value_template: '{{ wait.trigger.payload_json["type"] == "end" }}'
           - service: notify.phones
             data:
-              title: 'A {{label}} was detected on the {{camera_name}} Camera.'
+              title: 'A Person was detected on the {{camera_name}} Camera.'
               message: 'Detected in the following zones: {{zones_output}}'
               data:
                 ttl: 0

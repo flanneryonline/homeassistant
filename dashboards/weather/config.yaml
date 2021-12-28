@@ -1,0 +1,5 @@
+title: Weather
+views:
+  - title: Weather
+    path: home-weather
+    cards: !include_dir_merge_list ./cards/

@@ -1,0 +1,67 @@
+- alias: Fan - Powder Room - Turn On
+  trigger:
+    - entity_id: binary_sensor.powder_room_motion
+      platform: state
+      to: 'on'
+      from: 'off'
+    - entity_id: switch.powder_room_fan
+      platform: state
+      to: 'off'
+      from: 'on'
+      for:
+        hours: 1
+        minutes: 30
+  condition:
+    - condition: state
+      entity_id: switch.powder_room_fan
+      state: "off"
+    - '{{ states("sensor.season") != "winter" }}'
+  action:
+    - entity_id: switch.powder_room_fan
+      service: switch.turn_on
+  mode: single
+
+- alias: Fan - Powder Room - Turn Off
+  trigger:
+    - entity_id: switch.powder_room_fan
+      platform: state
+      to: 'on'
+      from: 'off'
+      for:
+        minutes: 30
+  action:
+    - entity_id: switch.powder_room_fan
+      service: switch.turn_off
+  mode: single
+
+- alias: Fan - Powder Room - Speed On
+  trigger:
+    - entity_id: switch.powder_room_fan_speed
+      platform: state
+      from: 'on'
+      to: 'off'
+      for:
+        hours: 5
+        minutes: 30
+  condition:
+    - '{{ states("sensor.season") != "winter" }}'
+  action:
+    - entity_id: switch.powder_room_fan
+      service: switch.turn_on
+    - entity_id: switch.powder_room_fan_speed
+      service: switch.turn_on
+  mode: single
+
+- alias: Fan - Powder Room - Speed Off
+  trigger:
+    - entity_id: switch.powder_room_fan_speed
+      platform: state
+      from: 'off'
+      to: 'on'
+      for:
+        minutes: 30
+  condition: []
+  action:
+    - entity_id: switch.powder_room_fan_speed
+      service: switch.turn_off
+  mode: single

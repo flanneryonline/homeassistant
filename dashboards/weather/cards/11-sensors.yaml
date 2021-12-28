@@ -1,0 +1,29 @@
+- type: vertical-stack
+  cards:
+    - type: history-graph
+      title: 'Pressure'
+      hours_to_show: 12
+      entities:
+        - name: Indoor Pressure
+          entity: sensor.indoor_zero_pressure
+        - name: Outdoor Pressure
+          entity: sensor.outdoor_zero_pressure
+
+    - type: history-graph
+      title: 'Temperature'
+      hours_to_show: 12
+      entities:
+        - name: Indoor Temperature
+          entity: sensor.average_temperature
+        - name: Outdoor Temperature
+          entity: sensor.outside_temperature
+
+    - type: history-graph
+      title: 'Humidity'
+      hours_to_show: 12
+      entities:
+        - name: Indoor Humidity
+          entity: sensor.inside_absolutehumidity
+        - name: Outdoor Humidity
+          entity: sensor.outside_absolutehumidity
+

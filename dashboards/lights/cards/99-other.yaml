@@ -1,0 +1,12 @@
+- title: Other
+  type: entities
+  entities:
+    - entity: light.water_closet
+      type: custom:slider-entity-row
+      toggle: true
+    - entity: light.front_room
+      type: custom:slider-entity-row
+      toggle: true
+    - entity: light.stairs
+    - entity: light.front_hall
+    - entity: light.christmas_tree

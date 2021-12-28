@@ -1,0 +1,24 @@
+dog_food_last_changed:
+  name: Dog Food Last Changed
+  has_date: true
+  has_time: true
+
+front_door_entry_last_changed:
+  name: Front Door Entry Last Changed
+  has_date: true
+  has_time: true
+
+deck_entry_last_changed:
+  name: Deck Entry Last Changed
+  has_date: true
+  has_time: true
+
+patio_entry_last_changed:
+  name: Patio Entry Last Changed
+  has_date: true
+  has_time: true
+
+garage_entry_last_changed:
+  name: Garage Entry Last Changed
+  has_date: true
+  has_time: true

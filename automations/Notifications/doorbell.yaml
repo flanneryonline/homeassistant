@@ -1,6 +1,7 @@
-- alias: Doorbell
+- alias: Notifications - Doorbell - Speaker
   variables:
     local_url: !secret local_url
+    base_url: !secret external_url
   trigger:
     - platform: state
       entity_id: switch.doorbell
@@ -8,6 +9,11 @@
       from: 'off'
   condition: []
   action:
+    - service: camera.snapshot
+      target:
+        entity_id: camera.doorbell
+      data:
+        filename: /config/www/tmp/phones_front_door.jpg
     - service: notify.phones
       data:
         message: Doorbell
@@ -16,10 +22,120 @@
           channel: 'Doorbell'
           ttl: 0
           priority: high
+          image: '{{base_url}}/local/tmp/phones_front_door.jpg'
     - service: media_player.play_media
       target:
         entity_id: media_player.cast_kitchen_mini
       data:
         media_content_id: '{{local_url}}/local/doorbell.mp3'
         media_content_type: music
+  mode: single
+
+- alias: Notifications - Doorbell - Front Room
+  variables:
+    local_url: !secret local_url
+    base_url: !secret external_url
+  trigger:
+    - platform: state
+      entity_id: switch.doorbell
+      to: 'on'
+      from: 'off'
+  condition:
+    - condition: state
+      entity_id: switch.front_room_tv
+      state: 'on'
+  action:
+    - service: media_player.play_media
+      target:
+        entity_id: media_player.cast_front_room
+      data:
+        media_content_id: '{{local_url}}/local/doorbell.mp3'
+        media_content_type: music
+  mode: single
+
+- alias: Notifications - Doorbell - Patio
+  variables:
+    local_url: !secret local_url
+    base_url: !secret external_url
+  trigger:
+    - platform: state
+      entity_id: switch.doorbell
+      to: 'on'
+      from: 'off'
+  condition:
+    - condition: state
+      entity_id: binary_sensor.patio_person_motion
+      state: 'on'
+    - condition: state
+      entity_id: media_player.m4_patio
+      state: 'on'
+  action:
+    - service: media_player.play_media
+      target:
+        entity_id: media_player.cast_home
+      data:
+        media_content_id: '{{local_url}}/local/doorbell.mp3'
+        media_content_type: music
+  mode: single
+
+- alias: Notifications - Doorbell - FamilyRoom TV
+  trigger:
+    - platform: state
+      entity_id: switch.doorbell
+      to: 'on'
+      from: 'off'
+  condition:
+    - condition: state
+      entity_id: remote.family_room
+      state: 'on'
+  action:
+    - service: camera.snapshot
+      target:
+        entity_id: camera.doorbell
+      data:
+        filename: /config/www/tmp/family_room_front_door.jpg
+    - service: notify.family_room_notification
+      data:
+        message: Doorbell
+        title: Doorbell
+        data:
+          fontsize: "large"
+          position: "bottom-right"
+          duration: 8
+          transparency: "20%"
+          color: "teal"
+          interrupt: 1
+          image:
+            path: /config/www/tmp/family_room_front_door.jpg
+  mode: single
+
+- alias: Notifications - Doorbell - Bedroom TV
+  trigger:
+    - platform: state
+      entity_id: switch.doorbell
+      to: 'on'
+      from: 'off'
+  condition:
+    - condition: state
+      entity_id: remote.bedroom
+      state: 'on'
+  action:
+    - service: camera.snapshot
+      target:
+        entity_id: camera.doorbell
+      data:
+        filename: /config/www/tmp/bedroom_front_door.jpg
+    - service: notify.bedroom_notification
+      data:
+        message: Doorbell
+        title: Doorbell
+        data:
+          fontsize: "large"
+          position: "bottom-right"
+          duration: 8
+          transparency: "20%"
+          color: "teal"
+          interrupt: 1
+          image:
+            path: /config/www/tmp/bedroom_front_door.jpg
   mode: single

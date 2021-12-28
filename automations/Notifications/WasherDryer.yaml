@@ -1,4 +1,4 @@
-- alias: Washing Machine Done
+- alias: Notifications - Laundry - Washing Machine Done
   trigger:
     - platform: state
       entity_id: sensor.washer_state
@@ -15,7 +15,8 @@
           ttl: 0
           priority: high
   mode: single
-- alias: Dryer Done
+
+- alias: Notifications - Laundry - Dryer Done
   trigger:
     - platform: state
       entity_id: sensor.dryer_state

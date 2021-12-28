@@ -1,4 +1,4 @@
-- alias: Camera Notifications - Animal
+- alias: Notifications - Camera - Animal
   mode: single
   max_exceeded: silent
   trigger:
@@ -18,9 +18,7 @@
     zone_only: false
     zones: []
     labels:
-      - dog
-      - cat
-      - mouse
+      - animal
   condition:
     - '{{ type != "end" }}'
     - '{{ not zone_only or entered_zones|length > 0 }}'
@@ -29,7 +27,7 @@
   action:
     - service: notify.phones
       data:
-        title: 'A {{label}} was detected on the {{camera_name}} Camera.'
+        title: 'An animal was detected on the {{camera_name}} Camera.'
         message: 'Detected in the following zones: {{zones_output}}'
         data:
           ttl: 0
@@ -52,7 +50,7 @@
             value_template: '{{ wait.trigger.payload_json["type"] == "end" }}'
           - service: notify.phones
             data:
-              title: 'A {{label}} was detected on the {{camera_name}} Camera.'
+              title: 'An animal was detected on the {{camera_name}} Camera.'
               message: 'Detected in the following zones: {{zones_output}}'
               data:
                 ttl: 0

@@ -1,0 +1,29 @@
+doorbell_person_motion_last_changed:
+  name: Camera Patio Last Changed
+  has_date: true
+  has_time: true
+
+garage_person_motion_last_changed:
+  name: Camera Garage Last Changed
+  has_date: true
+  has_time: true
+
+patio_person_motion_last_changed:
+  name: Camera Doorbell Last Changed
+  has_date: true
+  has_time: true
+
+doorbell_animal_motion_last_changed:
+  name: Camera Patio Last Changed
+  has_date: true
+  has_time: true
+
+garage_animal_motion_last_changed:
+  name: Camera Garage Last Changed
+  has_date: true
+  has_time: true
+
+patio_animal_motion_last_changed:
+  name: Camera Doorbell Last Changed
+  has_date: true
+  has_time: true

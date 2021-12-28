@@ -8,5 +8,5 @@
   name: Stairs
   entity_id: switch.stairs_lights
 - platform: switch
-  name: Garage
-  entity_id: switch.garage_lights
+  name: Christmas Tree
+  entity_id: switch.christmas_tree

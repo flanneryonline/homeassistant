@@ -1,0 +1,70 @@
+- name: Basement
+  platform: universal
+  device_class: receiver
+  children:
+    - media_player.m3_basement
+    - media_player.plex_home_cast
+    - media_player.cast_home
+  attributes:
+    state: media_player.m3_basement
+    is_volume_muted: media_player.m3_basement|is_volume_muted
+    volume_level: media_player.m3_basement|volume_level
+    source: media_player.m3_basement|source
+    source_list: media_player.m3_basement|source_list
+  commands:
+    turn_on:
+      service: media_player.turn_on
+      target:
+        entity_id: media_player.m3_basement
+    turn_off:
+      service: media_player.turn_off
+      target:
+        entity_id: media_player.m3_basement
+    volume_up:
+      service: media_player.volume_up
+      target:
+        entity_id: media_player.m3_basement
+    volume_down:
+      service: media_player.volume_down
+      target:
+        entity_id: media_player.m3_basement
+    volume_mute:
+      service: media_player.volume_mute
+      target:
+        entity_id: media_player.m3_basement
+    select_source:
+      service: media_player.select_source
+      target:
+        entity_id: media_player.m3_basement
+      data:
+        source: '{{ source }}'
+    volume_set:
+      service: media_player.volume_set
+      target:
+        entity_id: media_player.m3_basement
+      data:
+        volume_level: "{{ volume_level }}"
+    media_seek:
+      service: media_player.media_seek
+      data:
+        seek_position: '{{ seek_position }}'
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m3_basement", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_next_track:
+      service: media_player.media_seek
+      data:
+        seek_position: 99999
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m3_basement", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_stop:
+      service: media_player.media_stop
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m3_basement", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_pause:
+      service: media_player.media_pause
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m3_basement", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_play:
+      service: media_player.media_play
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m3_basement", "source") | lower | replace(" ", "_") | replace("_cast","") }}'

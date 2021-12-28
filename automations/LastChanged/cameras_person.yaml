@@ -1,0 +1,11 @@
+- alias: Last Changed - Cameras Person
+  trigger:
+    platform: state
+    entity_id: binary_sensor.doorbell_person_motion, binary_sensor.patio_person_motion, binary_sensor.garage_person_motion
+    from: 'off'
+    to: 'on'
+  action:
+    - service: input_datetime.set_datetime
+      data_template:
+        entity_id: input_datetime.{{ trigger.to_state.object_id }}_last_changed
+        datetime: '{{ now().timestamp() | timestamp_local }}'

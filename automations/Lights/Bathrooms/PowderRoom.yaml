@@ -1,0 +1,31 @@
+- alias: Light - Powder Room - On
+  trigger:
+    - entity_id: binary_sensor.powder_room_motion
+      platform: state
+      to: 'on'
+      from: 'off'
+  condition:
+    - condition: state
+      entity_id: light.powder_room
+      state: "off"
+  action:
+    - entity_id: light.powder_room
+      service: light.turn_on
+  mode: single
+
+- alias: Light - Powder Room - Off
+  trigger:
+    - entity_id: binary_sensor.powder_room_motion
+      platform: state
+      to: 'off'
+      from: 'on'
+      for:
+        minutes: 10
+  condition:
+    - condition: state
+      entity_id: light.powder_room
+      state: 'on'
+  action:
+    - entity_id: light.powder_room
+      service: light.turn_off
+  mode: single

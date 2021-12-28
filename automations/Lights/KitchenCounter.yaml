@@ -1,0 +1,26 @@
+- alias: Lights - Kitchen Counter - On
+  trigger:
+    - entity_id: light.kitchen
+      platform: state
+      to: 'on'
+  action:
+    - service: light.turn_on
+      entity_id: light.kitchen_counter
+    - delay: '00:00:02'
+    - service: light.turn_on
+      target:
+        entity_id: light.kitchen_counter
+      data:
+        brightness_pct: 25
+        color_temp: 300
+  mode: single
+
+- alias: Lights - Kitchen Counter - Off
+  trigger:
+    - entity_id: light.kitchen
+      platform: state
+      to: 'off'
+  action:
+    - service: light.turn_off
+      entity_id: light.kitchen_counter
+  mode: single

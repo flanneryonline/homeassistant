@@ -1,0 +1,6 @@
+- title: Kaylee
+  type: markdown
+  content: >
+    Last Feeding:  **{{ state_attr('input_datetime.dog_food_last_changed', 'timestamp') | timestamp_custom('%I:%M %p') }}**
+
+    Last Time Outside:  **{{ state_attr('input_datetime.patio_entry_last_changed', 'timestamp') | timestamp_custom('%I:%M %p') }}**

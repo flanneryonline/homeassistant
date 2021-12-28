@@ -1,0 +1,5 @@
+- title: Outside
+  type: entities
+  entities:
+    - entity: light.outside_front
+    - entity: switch.outside_christmas_lights

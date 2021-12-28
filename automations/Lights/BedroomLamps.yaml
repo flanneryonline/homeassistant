@@ -1,4 +1,4 @@
-- alias: Bedroom Lamps
+- alias: Light - Bedroom Lamps
   hide_entity: True
   trigger:
     - id: pats_side_on
@@ -18,11 +18,11 @@
       platform: state
       to: 'off'
     - id: switch_on
-      entity_id: switch.bedroom_lamps
+      entity_id: light.bedroom_lamps
       platform: state
       to: 'on'
     - id: switch_off
-      entity_id: switch.bedroom_lamps
+      entity_id: light.bedroom_lamps
       platform: state
       to: 'off'
   condition: []
@@ -129,11 +129,11 @@
                 - condition: trigger
                   id: pats_side_on
             - condition: state
-              entity_id: switch.bedroom_lamps
+              entity_id: light.bedroom_lamps
               state: "off"
         sequence:
-          - entity_id: switch.bedroom_lamps
-            service: switch.turn_on
+          - entity_id: light.bedroom_lamps
+            service: light.turn_on
       #off Mandys side
       - conditions:
         - condition: and
@@ -144,11 +144,11 @@
               entity_id: light.pats_bedside
               state: "off"
             - condition: state
-              entity_id: switch.bedroom_lamps
+              entity_id: light.bedroom_lamps
               state: "on"
         sequence:
-          - entity_id: switch.bedroom_lamps
-            service: switch.turn_off
+          - entity_id: light.bedroom_lamps
+            service: light.turn_off
       #off Pats side
       - conditions:
         - condition: and
@@ -159,9 +159,9 @@
               entity_id: light.mandys_bedside
               state: "off"
             - condition: state
-              entity_id: switch.bedroom_lamps
+              entity_id: light.bedroom_lamps
               state: "on"
         sequence:
-          - entity_id: switch.bedroom_lamps
-            service: switch.turn_off
+          - entity_id: light.bedroom_lamps
+            service: light.turn_off
   mode: single

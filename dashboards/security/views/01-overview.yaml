@@ -1,0 +1,3 @@
+title: Entries
+path: security-overview
+cards: !include_dir_merge_list ../cards/overview/

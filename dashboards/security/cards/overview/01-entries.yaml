@@ -1,0 +1,6 @@
+- type: entities
+  entities:
+    - entity: sensor.front_door_entry_last_changed
+    - entity: sensor.garage_entry_last_changed
+    - entity: sensor.deck_entry_last_changed
+    - entity: sensor.patio_entry_last_changed

@@ -24,8 +24,6 @@ http:
 logger:
   default: error
   filters:
-    homeassistant.loader:
-      - "We found a custom integration *"
     pychromecast.socket_client:
       - "Failed to connect to service ServiceInfo"
       - "Error communicating with socket, resetting connection"
@@ -50,20 +48,20 @@ recorder:
   include:
     domains:
       - person
+      - light
+      - switch
     entity_globs:
       - binary_sensor.*_motion
       - binary_sensor.*_water
       - camera.*_person
       - sensor.*_kwh
       - sensor.*_watts
-      - sensor.*_amps
+      - sensor.*_humidity
+      - sensor.*_absolutehumidity
+      - sensor.*_temperature
+      - sensor.*_pressure
+      - input_datetime.*_last_changed
     entities:
       - binary_sensor.garage_door_status
-      - sensor.dryer_job_state
-      - sensor.washer_job_state
       - sensor.dryer_state
       - sensor.washer_state
-      - sensor.dryer_energy
-      - sensor.washer_energy
-      - switch.doorbell
-      - switch.garage_door_button

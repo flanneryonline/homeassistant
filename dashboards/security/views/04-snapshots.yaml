@@ -1,0 +1,3 @@
+title: Snapshots
+path: security-snapshots
+cards: !include_dir_merge_list ../cards/snapshots/

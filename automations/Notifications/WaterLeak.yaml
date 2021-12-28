@@ -1,4 +1,4 @@
-- alias: Sump Pump Water Leak
+- alias: Notifications - Security - Sump Pump Water Leak
   trigger:
     - entity_id: binary_sensor.sump_pump_water
       platform: state

@@ -1,5 +1,4 @@
-- alias: Outside Lights
-  hide_entity: True
+- alias: Lights - Outside
   trigger:
     - id: sun_up
       entity_id: sun.sun
@@ -9,6 +8,8 @@
       entity_id: sun.sun
       platform: state
       to: 'below_horizon'
+      for:
+        minutes: 30
   condition: []
   action:
     - choose:

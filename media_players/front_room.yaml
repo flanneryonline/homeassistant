@@ -2,7 +2,6 @@
   platform: universal
   device_class: receiver
   children:
-    - media_player.m2_front_room
     - media_player.plex_front_room_cast
     - media_player.cast_front_room
     - media_player.plex_home_cast
@@ -46,3 +45,27 @@
         entity_id: media_player.m2_front_room
       data:
         volume_level: "{{ volume_level }}"
+    media_seek:
+      service: media_player.media_seek
+      data:
+        seek_position: '{{ seek_position }}'
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m2_front_room", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_next_track:
+      service: media_player.media_seek
+      data:
+        seek_position: 99999
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m2_front_room", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_stop:
+      service: media_player.media_stop
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m2_front_room", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_pause:
+      service: media_player.media_pause
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m2_front_room", "source") | lower | replace(" ", "_") | replace("_cast","") }}'
+    media_play:
+      service: media_player.media_play
+      target:
+        entity_id: 'media_player.cast_{{ state_attr("media_player.m2_front_room", "source") | lower | replace(" ", "_") | replace("_cast","") }}'

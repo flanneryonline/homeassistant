@@ -1,0 +1,5 @@
+title: Lights
+views:
+  - title: Lights
+    path: home-lights
+    cards: !include_dir_merge_list ./cards/

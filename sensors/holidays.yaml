@@ -1,0 +1,14 @@
+- platform: next_holiday
+  sources:
+    - country: US
+      state: IL
+      filter:
+        - "New Year's Day (Observed)"
+        - "New Year's Day"
+        - 'Memorial Day'
+        - 'Independence Day'
+        - 'Independence Day (Observed)'
+        - 'Labor Day'
+        - 'Thanksgiving'
+        - 'Christmas Day (Observed)'
+        - 'Christmas Day'

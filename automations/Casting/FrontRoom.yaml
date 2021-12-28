@@ -1,5 +1,4 @@
-- alias: Front Room TV Switch
-  hide_entity: True
+- alias: Switch - Front Room
   trigger:
     - id: switch_on
       entity_id: switch.front_room_tv

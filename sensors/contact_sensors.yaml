@@ -1,0 +1,14 @@
+- platform: template
+  sensors:
+    front_door_entry_last_changed:
+      friendly_name: Front Door Opened
+      value_template: "{{ state_attr('input_datetime.front_door_entry_last_changed', 'timestamp') | timestamp_custom('%D %I:%M %p') }}"
+    garage_entry_last_changed:
+      friendly_name: Garage Door Opened
+      value_template: "{{ state_attr('input_datetime.garage_entry_last_changed', 'timestamp') | timestamp_custom('%D %I:%M %p') }}"
+    deck_entry_last_changed:
+      friendly_name: Deck Door Opened
+      value_template: "{{ state_attr('input_datetime.deck_entry_last_changed', 'timestamp') | timestamp_custom('%D %I:%M %p') }}"
+    patio_entry_last_changed:
+      friendly_name: Patio Door Opened
+      value_template: "{{ state_attr('input_datetime.patio_entry_last_changed', 'timestamp') | timestamp_custom('%D %I:%M %p') }}"

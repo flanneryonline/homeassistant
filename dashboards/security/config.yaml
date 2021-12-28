@@ -1,0 +1,2 @@
+title: Security
+views: !include_dir_list ./views

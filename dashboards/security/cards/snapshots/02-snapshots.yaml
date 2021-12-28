@@ -1,0 +1,22 @@
+- type: vertical-stack
+  cards:
+    - type: picture-entity
+      entity: camera.doorbell_person
+      camera_image: camera.doorbell_person
+    - type: picture-entity
+      entity: camera.patio_person
+      camera_image: camera.patio_person
+    - type: picture-entity
+      entity: camera.garage_person
+      camera_image: camera.garage_person
+- type: vertical-stack
+  cards:
+    - type: picture-entity
+      entity: camera.doorbell_animal
+      camera_image: camera.doorbell_animal
+    - type: picture-entity
+      entity: camera.patio_animal
+      camera_image: camera.patio_animal
+    - type: picture-entity
+      entity: camera.garage_animal
+      camera_image: camera.garage_animal

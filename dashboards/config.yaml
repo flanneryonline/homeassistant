@@ -1,0 +1,34 @@
+lovelace-home:
+  mode: yaml
+  title: Home
+  icon: mdi:home-circle
+  show_in_sidebar: true
+  filename: dashboards/overview/config.yaml
+
+lovelace-lights:
+  mode: yaml
+  title: Lights
+  icon: mdi:lightbulb-on-outline
+  show_in_sidebar: true
+  filename: dashboards/lights/config.yaml
+
+lovelace-security:
+  mode: yaml
+  title: Security
+  icon: mdi:shield-home
+  show_in_sidebar: true
+  filename: dashboards/security/config.yaml
+
+lovelace-media:
+  mode: yaml
+  title: Media
+  icon: mdi:play-box-multiple
+  show_in_sidebar: true
+  filename: dashboards/media/config.yaml
+
+lovelace-weather:
+  mode: yaml
+  title: Weather
+  icon: mdi:weather-cloudy
+  show_in_sidebar: true
+  filename: dashboards/weather/config.yaml

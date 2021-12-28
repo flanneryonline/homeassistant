@@ -1,0 +1,59 @@
+- alias: Lights - Outside Christmas
+  trigger:
+    - id: sun_up
+      entity_id: sun.sun
+      platform: state
+      to: 'below_horizon'
+      for:
+        hours: 5
+    - id: sun_down
+      entity_id: sun.sun
+      platform: state
+      to: 'below_horizon'
+      for:
+        minutes: 30
+  condition: []
+  action:
+    - choose:
+      - conditions:
+        - condition: trigger
+          id: sun_up
+        sequence:
+          - entity_id: switch.outside_christmas_lights
+            service: switch.turn_off
+      - conditions:
+        - condition: trigger
+          id: sun_down
+        sequence:
+          - entity_id: switch.outside_christmas_lights
+            service: switch.turn_on
+  mode: single
+
+- alias: Lights - Christmas Tree
+  trigger:
+    - id: turn_on
+      entity_id: sun.sun
+      platform: state
+      to: 'above_horizon'
+      for:
+        hours: 1
+    - id: turn_off
+      entity_id: media_player.bedroom
+      platform: state
+      to: 'on'
+  condition: []
+  action:
+    - choose:
+      - conditions:
+        - condition: trigger
+          id: turn_off
+        sequence:
+          - entity_id: switch.christmas_tree
+            service: switch.turn_off
+      - conditions:
+        - condition: trigger
+          id: turn_on
+        sequence:
+          - entity_id: switch.christmas_tree
+            service: switch.turn_on
+  mode: single

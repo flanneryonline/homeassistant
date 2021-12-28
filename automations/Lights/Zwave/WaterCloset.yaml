@@ -1,0 +1,36 @@
+- alias: Switch - Zwave - Water Closet Light - Dim Mode
+  trigger:
+    - entity_id: media_player.bedroom
+      platform: state
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    - service: zwave_js.set_config_parameter
+      target:
+        entity_id: light.water_closet
+      data:
+        parameter: "Enable/Disable Switch Mode"
+        value: 1
+  mode: single
+
+- alias: Switch - Zwave - Water Closet Light - Switch Mode
+  trigger:
+    - entity_id: sun.sun
+      platform: state
+      to: 'above_horizon'
+      for:
+        hours: 3
+  condition: []
+  action:
+    - service: zwave_js.set_config_parameter
+      target:
+        entity_id: light.water_closet
+      data:
+        parameter: "Enable/Disable Switch Mode"
+        value: 0
+  mode: single
+
+#hide_entity: True

@@ -1,0 +1,32 @@
+- type: vertical-stack
+  cards:
+    - type: history-graph
+      title: 'Energy'
+      hours_to_show: 6
+      entities:
+        - name: HVAC
+          entity: sensor.hvac_watts
+        - name: Bedrooms
+          entity: sensor.bedrooms_watts
+        - name: Bathrooms
+          entity: sensor.bathrooms_watts
+        - name: Basement
+          entity: sensor.basement_watts
+        - name: Utilities
+          entity: sensor.utility_watts
+        - name: First Floor
+          entity: sensor.first_floor_watts
+        - name: Second Floor
+          entity: sensor.second_floor_watts
+    - type: history-graph
+      title: 'Energy'
+      hours_to_show: 6
+      entities:
+        - name: Grid Input
+          entity: sensor.grid_input_watts
+        - name: Grid Output
+          entity: sensor.grid_output_watts
+        - name: Solar
+          entity: sensor.solar_watts
+        - name: Consumed
+          entity: sensor.consumed_watts
