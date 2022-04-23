@@ -18,3 +18,5 @@ scripts.yaml
 secrets.yaml
 !packages/*.yaml
 *.backup
+*.zip
+node-red/*
